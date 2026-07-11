@@ -9,17 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: maximize build space
+        uses: ublue-os/remove-unwanted-software@master
+
       - name: checkout
         uses: actions/checkout@v7
-    
-      - name: podman storage
-        uses: ublue-os/container-storage-action@main
 
       - name: login
         run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
 
       - name: build
-        run: podman build --tag ghcr.io/${{ github.repository }}:latest --skip-unused-stages=false --volume $(pwd):/run/src --security-opt=label=disable .
+        run: podman build --pull --tag ghcr.io/${{ github.repository }}:latest --skip-unused-stages=false --volume $(pwd):/run/src --security-opt=label=disable .
 
       - name: push
         run: podman push ghcr.io/${{ github.repository }}:latest
