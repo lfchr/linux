@@ -1,0 +1,17 @@
+[Unit]
+Description=Preinstall apps from Flathub
+ConditionPathExists=!/var/lib/flatpak/.flatpak-apps-installed
+Wants=network-online.target
+After=network-online.target
+Before=flatpak-system-helper.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=10
+ExecStart=/usr/bin/flatpak preinstall --noninteractive --system -y
+ExecStartPost=/usr/bin/touch /var/lib/flatpak/.flatpak-apps-installed
+
+[Install]
+WantedBy=multi-user.target

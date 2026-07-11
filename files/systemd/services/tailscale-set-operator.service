@@ -1,0 +1,13 @@
+[Unit]
+Description=Set main user as Tailscale operator
+ConditionPathExists=!/var/lib/tailscale/.tailscale-initialized
+BindsTo=tailscaled.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/tailscale set --operator=MAIN_USER
+ExecStartPost=/usr/bin/touch /var/lib/tailscale/.tailscale-initialized
+
+[Install]
+WantedBy=multi-user.target

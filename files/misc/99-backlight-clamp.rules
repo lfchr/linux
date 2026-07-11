@@ -1,0 +1,2 @@
+# unclamp backlight
+ACTION=="add", SUBSYSTEM=="backlight", ENV{ID_BACKLIGHT_CLAMP}="false"

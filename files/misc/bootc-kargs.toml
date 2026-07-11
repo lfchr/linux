@@ -1,0 +1,1 @@
+kargs = ["lockdown=integrity", "ia32_emulation=0", "quiet", "splash"]

@@ -1,0 +1,14 @@
+[org.gnome.desktop.peripherals.keyboard]
+delay=300
+repeat-interval=45
+
+[org.gnome.desktop.peripherals.touchpad]
+disable-while-typing=false
+speed=0.25
+tap-to-click=true
+
+[org.gnome.desktop.input-sources]
+xkb-options=['lv3:switch']
+
+[org.freedesktop.ibus.panel.emoji]
+unicode-hotkey=['<Control><Shift><Super>u']
