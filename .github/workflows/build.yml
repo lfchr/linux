@@ -1,0 +1,21 @@
+name: build and push
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+
+      - name: login
+        run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build
+        run: podman build --tag ghcr.io/${{ github.repository }}:latest --skip-unused-stages=false --volume $(pwd):/run/src --security-opt=label=disable .
+
+      - name: push
+        run: podman push ghcr.io/${{ github.repository }}:latest
