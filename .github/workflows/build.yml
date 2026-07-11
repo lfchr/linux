@@ -2,7 +2,8 @@ name: build and push
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
 
 jobs:
   build:
@@ -10,6 +11,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v7
+    
+      - name: podman storage
+        uses: ublue-os/container-storage-action@main
 
       - name: login
         run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
