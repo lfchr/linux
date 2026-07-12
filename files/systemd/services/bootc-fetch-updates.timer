@@ -1,0 +1,11 @@
+[Unit]
+Description=Fetch bootc updates
+ConditionPathExists=/run/ostree-booted
+
+[Timer]
+OnCalendar=Fri *-*-* 20:30:00 UTC
+OnBootSec=10min
+OnUnitInactiveSec=1d
+
+[Install]
+WantedBy=timers.target

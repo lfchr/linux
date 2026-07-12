@@ -1,3 +1,5 @@
+enable bootc-fetch-updates.timer
+
 enable tailscaled.service
 enable tailscale-set-operator.service
 

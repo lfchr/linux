@@ -1,0 +1,7 @@
+[Unit]
+Description=Fetch bootc updates
+ConditionPathExists=/run/ostree-booted
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bootc upgrade --quiet
