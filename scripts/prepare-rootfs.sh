@@ -40,6 +40,8 @@ done
 $scripts/flatpak.sh
 
 # misc.
+$scripts/mimeapps.sh
+
 cp $files/misc/99-backlight-clamp.rules /usr/lib/udev/rules.d/
 cp $files/misc/bootc-kargs.toml /usr/lib/bootc/kargs.d/00-desktop.toml
 
