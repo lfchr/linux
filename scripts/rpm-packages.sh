@@ -44,11 +44,11 @@ dnf swap --allowerasing -y \
 fedora-release-identity-basic \
 fedora-release-identity-silverblue
 
-dnf up -y fedora-release
-
 dnf swap --allowerasing -y \
 glibc-minimal-langpack \
 glibc-langpack-en
+
+dnf up -y fedora-release-identity-silverblue glibc-langpack-en
 
 # dnf group info gnome-desktop
 # printer drivers are installed separately
