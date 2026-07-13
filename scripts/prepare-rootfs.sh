@@ -11,6 +11,8 @@ $scripts/rpm-packages.sh
 $scripts/remove-fedora-logos.sh
 $scripts/os-release.sh
 
+cp $files/misc/bootc-fetch-updates /usr/bin/
+
 # prepare files
 
 # set the main user for the services that need it
