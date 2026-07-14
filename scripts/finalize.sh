@@ -7,6 +7,9 @@ cat > /usr/share/gnome-initial-setup/vendor.conf << 'EOF'
 skip=software
 EOF
 
+# remove all rpm repositories so they don’t show up in gnome software
+rm -f /etc/yum.repos.d/*
+
 systemctl set-default graphical.target
 systemctl preset-all
 
