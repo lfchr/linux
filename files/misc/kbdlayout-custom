@@ -45,7 +45,7 @@ xkb_symbols "mac-iso-custom" {
     include "level5(caps_switch)"
     include "custom(mac-modifiers)"
     include "level3(lsgt_switch)"
-    include "shift(both_capslock_cancel)"
+    include "shift(both_capslock)"
     // gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swap_lalt_lctl_lwin','ctrl:swap_ralt_rctl']"
 };
 
