@@ -3,17 +3,6 @@
 user_name=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user')
 uid=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .uid')
 
-function notify-available {
-    sudo -u "$user_name" DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send \
-    --app-name="System Updates" \
-    --app-icon="org.gnome.Settings-system-symbolic" \
-    --icon="document-save-symbolic" \
-    --transient \
-    --urgency=normal \
-    "Updates Available" \
-    "System updates will be downloaded"
-}
-
 function notify-restart {
     sudo -u "$user_name" DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send \
     --app-name="System Updates" \
@@ -26,7 +15,6 @@ function notify-restart {
 }
 
 if bootc upgrade --check | grep -qF "Update available"; then
-    notify-available
     bootc upgrade --quiet
     if [ $? -eq 0 ]; then
         notify-restart
