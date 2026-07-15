@@ -1,6 +1,30 @@
 [org.gnome.shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Papers.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Software.desktop']
 
-# no folders
 [org.gnome.desktop.app-folders]
 folder-children=['']
+
+[org.gnome.calculator]
+button-mode='keyboard'
+currency-display='both'
+favorite-currencies=['EUR', 'GBP', 'DKK', 'NOK', 'SEK', 'USD']
+
+[org.gnome.TextEditor]
+indent-style='space'
+show-line-numbers=true
+spellcheck=false
+wrap-text=false
+indent-style='space'
+tab-width=4
+
+# don’t forget to change id when added to gnome’s core apps
+[net.nokyan.Resources]
+apps-show-drive-read-speed=true
+apps-show-drive-write-speed=true
+processes-show-drive-read-speed=true
+processes-show-drive-write-speed=true
+processes-show-user=false
+processes-show-commandline=true
+show-virtual-network-interfaces=true
+sidebar-description=true
+sidebar-details=true

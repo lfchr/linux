@@ -1,6 +1,8 @@
 [org.gnome.nautilus.preferences]
+date-time-format='detailed'
 default-folder-viewer='list-view'
 show-delete-permanently=true
+show-directory-item-counts='always'
 
 [org.gnome.nautilus.list-view]
 default-zoom-level='small'

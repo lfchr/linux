@@ -29,3 +29,12 @@ sleep-inactive-ac-timeout=7200
 
 [org.gnome.settings-daemon.plugins.housekeeping]
 donation-reminder-enabled=false
+
+[org.gnome.desktop.session]
+idle-delay=900
+
+[org.gnome.desktop.screensaver]
+restart-enabled=true
+
+[org.gnome.desktop.notifications]
+show-in-lock-screen=false
