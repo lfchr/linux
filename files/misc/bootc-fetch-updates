@@ -1,22 +1,41 @@
 #!/usr/bin/env bash
 
+user_name=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user')
+
 function notify-restart {
-    user_name=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user')
-    run0 -u "$user_name" notify-send \
-    --app-name="System Updates" \
-    --app-icon="org.gnome.Settings-system-symbolic" \
-    --icon="software-update-available-symbolic" \
-    --transient \
-    --urgency=normal \
-    "Updates Ready to Install" \
-    "System updates will be installed on next restart"
+    run0 -u "$user_name" \
+    notify-send \
+        --app-name="System Updates" \
+        --app-icon="org.gnome.Settings-system-symbolic" \
+        --icon="software-update-available-symbolic" \
+        --transient \
+        --urgency=normal \
+        "Updates Ready to Install" \
+        "System updates will be installed on next restart"
 }
 
-if bootc upgrade --check | grep -qF "Update available"; then
-    bootc upgrade --quiet
-    if [ $? -eq 0 ]; then
-        notify-restart
-    else
-        exit 1
+function power-saver-enabled {
+    run0 -u "$user_name" \
+    busctl --user get-property \
+        org.freedesktop.portal.Desktop \
+        /org/freedesktop/portal/desktop \
+        org.freedesktop.portal.PowerProfileMonitor \
+        power-saver-enabled \
+        | grep -qF "true"
+}
+
+if power-saver-enabled; then
+    printf "Power saver enabled, not fetching updates"
+    exit 0
+else
+    if bootc upgrade --check | grep -qF "Update available"; then
+        printf "Updates available, fetching"
+        bootc upgrade --quiet
+        if [ $? -eq 0 ]; then
+            printf "Updates staged, notifying user"
+            notify-restart
+        else
+            exit 1
+        fi
     fi
 fi
