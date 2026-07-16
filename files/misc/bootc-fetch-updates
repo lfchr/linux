@@ -9,7 +9,7 @@ function notify-restart {
     --transient \
     --urgency=normal \
     "Updates Ready to Install" \
-    "System will be updated on next restart."
+    "System updates will be installed on next restart"
 }
 
 if bootc upgrade --check | grep -qF "Update available"; then

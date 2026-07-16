@@ -27,6 +27,8 @@ RUN --mount=from=rootfs,src=/,target=/chunkah,ro \
 	
 FROM oci:out AS final
 LABEL containers.bootc=1
+LABEL org.opencontainers.image.title="Linux"
+LABEL org.opencontainers.image.source="https://github.com/lfchr/linux"
 ENV container=oci
 STOPSIGNAL SIGRTMIN+3
 CMD ["/sbin/init"]
