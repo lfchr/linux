@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-user_name=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user')
-uid=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .uid')
-
 function notify-restart {
-    sudo -u "$user_name" DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send \
+    user_name=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user')
+    run0 -u "$user_name" notify-send \
     --app-name="System Updates" \
     --app-icon="org.gnome.Settings-system-symbolic" \
     --icon="software-update-available-symbolic" \
