@@ -34,7 +34,7 @@ ARG IMAGE_BASE_NAME=overridden
 
 LABEL containers.bootc=1
 LABEL org.opencontainers.image.created="$IMAGE_CREATED"
-LABEL org.opencontainers.image.url="https://github.com/lfchr/linux/pkgs/container/linux"
+LABEL org.opencontainers.image.url="https://github.com/lfchr/linux"
 LABEL org.opencontainers.image.source="https://github.com/lfchr/linux"
 LABEL org.opencontainers.image.version="$IMAGE_VERSION"
 LABEL org.opencontainers.image.vendor="lfchr"
