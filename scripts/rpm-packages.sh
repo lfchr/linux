@@ -312,7 +312,4 @@ ${workstation[@]} \
 ${groups[@]} \
 ${exclude[@]}
 
-# for testing in a virtual machine
-#dnf in -y @guest-agents @guest-desktop-agents
-
 dnf clean all

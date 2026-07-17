@@ -1,0 +1,24 @@
+# this containerfile removes a bunch of steps to make building faster
+# for testing purposes. this also runs ‘scripts/testing.sh’ when
+# preparing rootfs. build by running ‘make testimage’.
+
+ARG IMAGE_BASE_NAME=overridden
+
+FROM scratch AS baseconfig
+COPY files /files/
+COPY scripts /scripts/
+
+FROM $IMAGE_BASE_NAME AS rootfs
+
+RUN --mount=type=tmpfs,target=/run \
+    --mount=type=tmpfs,target=/tmp \
+    --mount=type=tmpfs,target=/var \
+    --mount=type=bind,from=baseconfig,src=/files,target=/run/files \
+    --mount=type=bind,from=baseconfig,src=/scripts,target=/run/scripts \
+    /run/scripts/testing.sh \
+    /run/scripts/prepare-rootfs.sh
+
+RUN bootc container lint --no-truncate
+
+LABEL containers.bootc=1
+

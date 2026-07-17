@@ -2,6 +2,9 @@ IMAGE_NAME ?= localhost/linux:latest
 BASE_IMAGE := quay.io/fedora/fedora-bootc:44
 CHUNKAH := quay.io/coreos/chunkah:latest
 
+TEST_IMAGE_NAME ?= localhost/linux:testing
+TEST_BASE_IMAGE := quay.io/fedora/fedora-bootc:44
+
 BASE_DIGEST = $(shell \
 	podman image inspect \
 		--format '{{ .Digest }}' \
@@ -31,4 +34,14 @@ image:
 		--build-arg=IMAGE_BASE_DIGEST="$(BASE_DIGEST)" \
 		--build-arg=IMAGE_BASE_NAME="$(BASE_IMAGE)" \
 		--build-arg=CHUNKAH="$(CHUNKAH)" \
+		.
+
+testimage:
+	podman build \
+		--tag $(TEST_IMAGE_NAME) \
+		--skip-unused-stages=false \
+		--volume $$(pwd):/run/src \
+		--security-opt=label=disable \
+		--build-arg=IMAGE_BASE_NAME="$(TEST_BASE_IMAGE)" \
+		--file=Containerfile.testing \
 		.
