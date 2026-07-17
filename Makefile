@@ -5,19 +5,74 @@ CHUNKAH := quay.io/coreos/chunkah:latest
 TEST_IMAGE_NAME ?= localhost/linux:testing
 TEST_BASE_IMAGE := quay.io/fedora/fedora-bootc:44
 
+IMAGE_URL = $(shell \
+	podman run --rm \
+		--volume $$(pwd):/run/src:ro \
+		--security-opt=label=disable \
+		$(BASE_IMAGE) \
+		sh -c ' \
+			set -a; \
+			source <(cat /run/src/scripts/os-release.sh | grep "^HOME_URL="); \
+			echo "$$HOME_URL" \
+		' \
+)
+IMAGE_SOURCE = $(IMAGE_URL)
+IMAGE_VENDOR = $(shell \
+	podman run --rm \
+		--volume $$(pwd):/run/src:ro \
+		--security-opt=label=disable \
+		$(BASE_IMAGE) \
+		sh -c ' \
+			set -a; \
+			source <(cat /run/src/scripts/os-release.sh | grep "^VENDOR_NAME="); \
+			echo "$$VENDOR_NAME" \
+		' \
+)
+IMAGE_TITLE = $(shell \
+	podman run --rm \
+		--volume $$(pwd):/run/src:ro \
+		--security-opt=label=disable \
+		$(BASE_IMAGE) \
+		sh -c ' \
+			set -a; \
+			source <(cat /run/src/scripts/os-release.sh | grep "^OS_NAME="); \
+			echo "$$OS_NAME" \
+		' \
+)
+IMAGE_DESCRIPTION = $(shell \
+	podman run --rm \
+		--volume $$(pwd):/run/src:ro \
+		--security-opt=label=disable \
+		$(BASE_IMAGE) \
+		sh -c ' \
+			set -a; \
+			source <(cat /run/src/scripts/os-release.sh | grep "^OS_DESCRIPTION="); \
+			echo "$$OS_DESCRIPTION" \
+		' \
+)
 BASE_DIGEST = $(shell \
 	podman image inspect \
 		--format '{{ .Digest }}' \
 		$(BASE_IMAGE) \
 )
 IMAGE_CREATED = $(shell \
-	date --iso-8601=minutes \
+	podman run --rm \
+		--volume $$(pwd):/run/src:ro \
+		--security-opt=label=disable \
+		$(BASE_IMAGE) \
+		date --iso-8601=minutes \
 )
 IMAGE_VERSION = $(shell \
-	podman run \
-		--rm --env "BUILD=$$(sed -n 's/^BUILD=//p' scripts/os-release.sh)" \
+	podman run --rm \
+		--volume $$(pwd):/run/src:ro \
+		--security-opt=label=disable \
 		$(BASE_IMAGE) \
-		sh -c 'eval echo $$BUILD' \
+		sh -c ' \
+			set -a; \
+			source <(cat /run/src/scripts/os-release.sh | grep "^BUILD="); \
+			source <(cat /run/src/scripts/os-release.sh | grep "^OS_VERSION="); \
+			echo "$$OS_VERSION (build $$BUILD)" \
+		' \
 )
 
 image:
@@ -29,12 +84,30 @@ image:
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
-		--build-arg=IMAGE_CREATED="$(IMAGE_CREATED)" \
-		--build-arg=IMAGE_VERSION="$(IMAGE_VERSION)" \
-		--build-arg=IMAGE_BASE_DIGEST="$(BASE_DIGEST)" \
-		--build-arg=IMAGE_BASE_NAME="$(BASE_IMAGE)" \
-		--build-arg=CHUNKAH="$(CHUNKAH)" \
+		--build-arg=oci_created="$(IMAGE_CREATED)" \
+		--build-arg=oci_url="$(IMAGE_URL)" \
+		--build-arg=oci_source="$(IMAGE_SOURCE)" \
+		--build-arg=oci_version="$(IMAGE_VERSION)" \
+		--build-arg=oci_vendor="$(IMAGE_VENDOR)" \
+		--build-arg=oci_licenses="MIT" \
+		--build-arg=oci_title="$(IMAGE_TITLE)" \
+		--build-arg=oci_description="$(IMAGE_DESCRIPTION)" \
+		--build-arg=oci_base_digest="$(BASE_DIGEST)" \
+		--build-arg=oci_base_name="$(BASE_IMAGE)" \
+		--build-arg=chunkah="$(CHUNKAH)" \
+		--annotation="containers.bootc=1" \
+		--annotation="org.opencontainers.image.created=$(IMAGE_CREATED)" \
+		--annotation="org.opencontainers.image.url=$(IMAGE_URL)" \
+		--annotation="org.opencontainers.image.source=$(IMAGE_SOURCE)" \
+		--annotation="org.opencontainers.image.version=$(IMAGE_VERSION)" \
+		--annotation="org.opencontainers.image.vendor=$(IMAGE_VENDOR)" \
+		--annotation="org.opencontainers.image.licenses=MIT" \
+		--annotation="org.opencontainers.image.title=$(IMAGE_TITLE)" \
+		--annotation="org.opencontainers.image.description=$(IMAGE_DESCRIPTION)" \
+		--annotation="org.opencontainers.image.base.digest=$(BASE_DIGEST)" \
+		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE)" \
 		.
+
 
 testimage:
 	podman build \
@@ -42,6 +115,6 @@ testimage:
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
-		--build-arg=IMAGE_BASE_NAME="$(TEST_BASE_IMAGE)" \
+		--build-arg=oci_base_name="$(TEST_BASE_IMAGE)" \
 		--file=Containerfile.testing \
 		.

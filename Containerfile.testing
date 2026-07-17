@@ -2,13 +2,13 @@
 # for testing purposes. this also runs ‘scripts/testing.sh’ when
 # preparing rootfs. build by running ‘make testimage’.
 
-ARG IMAGE_BASE_NAME=overridden
+ARG oci_base_name
 
 FROM scratch AS baseconfig
 COPY files /files/
 COPY scripts /scripts/
 
-FROM $IMAGE_BASE_NAME AS rootfs
+FROM $oci_base_name AS rootfs
 
 RUN --mount=type=tmpfs,target=/run \
     --mount=type=tmpfs,target=/tmp \

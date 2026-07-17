@@ -1,11 +1,11 @@
-ARG IMAGE_BASE_NAME=overridden
-ARG CHUNKAH=overridden
+ARG oci_base_name
+ARG chunkah
 
 FROM scratch AS baseconfig
 COPY files /files/
 COPY scripts /scripts/
 
-FROM $IMAGE_BASE_NAME AS rootfs
+FROM $oci_base_name AS rootfs
 RUN --mount=type=tmpfs,target=/run \
     --mount=type=tmpfs,target=/tmp \
     --mount=type=tmpfs,target=/var \
@@ -15,7 +15,7 @@ RUN --mount=type=tmpfs,target=/run \
 
 RUN bootc container lint --fatal-warnings --no-truncate
 
-FROM $CHUNKAH AS chunkah
+FROM $chunkah AS chunkah
 RUN --mount=from=rootfs,src=/,target=/chunkah,ro \
     --mount=type=bind,target=/run/src,rw \
     chunkah build \
@@ -27,22 +27,28 @@ RUN --mount=from=rootfs,src=/,target=/chunkah,ro \
 
 FROM oci:out AS final
 
-ARG IMAGE_CREATED=overridden
-ARG IMAGE_VERSION=overridden
-ARG IMAGE_BASE_DIGEST=overridden
-ARG IMAGE_BASE_NAME=overridden
+ARG oci_created
+ARG oci_url
+ARG oci_source
+ARG oci_version
+ARG oci_vendor
+ARG oci_licenses
+ARG oci_title
+ARG oci_description
+ARG oci_base_digest
+ARG oci_base_name
 
 LABEL containers.bootc=1
-LABEL org.opencontainers.image.created="$IMAGE_CREATED"
-LABEL org.opencontainers.image.url="https://github.com/lfchr/linux"
-LABEL org.opencontainers.image.source="https://github.com/lfchr/linux"
-LABEL org.opencontainers.image.version="$IMAGE_VERSION"
-LABEL org.opencontainers.image.vendor="lfchr"
-LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.title="Linux"
-LABEL org.opencontainers.image.description="Bootable Linux desktop container image"
-LABEL org.opencontainers.image.base.digest="$IMAGE_BASE_DIGEST"
-LABEL org.opencontainers.image.base.name="$IMAGE_BASE_NAME"
+LABEL org.opencontainers.image.created="$oci_created"
+LABEL org.opencontainers.image.url="$oci_url"
+LABEL org.opencontainers.image.source="$oci_source"
+LABEL org.opencontainers.image.version="$oci_version"
+LABEL org.opencontainers.image.vendor="$oci_vendor"
+LABEL org.opencontainers.image.licenses="$oci_licenses"
+LABEL org.opencontainers.image.title="$oci_title"
+LABEL org.opencontainers.image.description="$oci_description"
+LABEL org.opencontainers.image.base.digest="$oci_base_digest"
+LABEL org.opencontainers.image.base.name="$oci_base_name"
 
 ENV container=oci
 STOPSIGNAL SIGRTMIN+3

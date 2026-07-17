@@ -4,22 +4,47 @@ set -euxo pipefail
 
 . /usr/lib/os-release
 
-BUILD="$(date +%y.%m.%d)$(rpm -E %dist)"
-VERSION="26.08"
+# description is used by makefile
+
+OS_NAME="Linux Bootable Container"
+OS_DESCRIPTION="Bootable Linux desktop container image"
+OS_VERSION="26.7"
+
+BUILD="$(date +%Y.%m.%d)$(rpm -E %dist)"
+
+# www.freedesktop.org/software/systemd/man/259/os-release.html
 
 cat > /usr/lib/os-release << EOF
 NAME="Linux"
-PRETTY_NAME="Linux"
-VERSION="$VERSION"
-VERSION_ID=$VERSION
-IMAGE_VERSION="$BUILD"
-RELEASE_TYPE=stable
-DEFAULT_HOSTNAME="linux-????"
-HOME_URL="https://kernel.org"
-BUG_REPORT_URL="https://gitlab.com/fedora/bootc/base-images/-/work_items"
 ID=linux
 ID_LIKE=$ID
+PRETTY_NAME="$OS_NAME $OS_VERSION"
 VARIANT="desktop"
 VARIANT_ID=desktop
+VERSION="$OS_VERSION"
+VERSION_ID="$OS_VERSION"
+IMAGE_VERSION="$BUILD"
+RELEASE_TYPE="development"
+HOME_URL="https://github.com/lfchr/linux"
+BUG_REPORT_URL="https://gitlab.com/fedora/bootc/base-images/-/work_items"
 SUPPORT_END=$SUPPORT_END
+ANSI_COLOR="0;33"
+VENDOR_NAME="lfchr"
+DEFAULT_HOSTNAME="linux-????"
 EOF
+
+echo "$OS_NAME" > /usr/lib/fedora-release
+
+cat > /usr/lib/issue << EOF
+$OS_NAME $OS_VERSION
+build $BUILD \n \l
+
+EOF
+
+rm -f \
+/usr/lib/issue.net \
+/etc/issue.net \
+/usr/lib/system-release-cpe \
+/etc/system-release-cpe \
+/etc/fedora-release \
+/etc/redhat-release
