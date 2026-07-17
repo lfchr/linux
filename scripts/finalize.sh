@@ -19,7 +19,7 @@ systemctl preset-all
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
-sed -i "s|^EFIDIR=.*|EFIDIR=\"linux\"|" /usr/sbin/grub2-switch-to-blscfg
+sed -i "s|^EFIDIR=.*|EFIDIR=\"fedora\"|" /usr/sbin/grub2-switch-to-blscfg
 
 sed -i 's/timeout_style=menu/timeout_style=hidden/g' /usr/lib/bootupd/grub2-static/grub-static-pre.cfg
 
