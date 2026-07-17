@@ -10,8 +10,8 @@ function notify-restart {
         --icon="software-update-available-symbolic" \
         --transient \
         --urgency=normal \
-        "Updates Ready to Install" \
-        "System updates will be installed on next restart"
+        "An update has been installed" \
+        "A restart is required for it to take effect"
 }
 
 function power-saver-enabled {
