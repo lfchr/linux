@@ -20,8 +20,7 @@ cp $files/misc/bootc-fetch-updates /usr/bin/
 
 MAIN_USER=chr
 
-for service in $(ls $files/systemd/services)
-do
+for service in $(ls $files/systemd/services); do
 	sed "s/MAIN_USER/$MAIN_USER/g" $files/systemd/services/$service > /usr/lib/systemd/system/$service
 done
 
@@ -32,16 +31,14 @@ cp $files/systemd/zram-generator.conf /usr/lib/systemd/
 
 ## dracut:
 
-for conf in $(ls $files/dracut)
-do
-	cp $files/dracut/$conf /usr/lib/dracut/dracut.conf.d/
+for conf in $files/dracut/*; do
+	cp $conf /usr/lib/dracut/dracut.conf.d/
 done
 
-## gnome gsettings:
+## gnome schemas:
 
-for override in $(ls $files/gnome)
-do
-	cp $files/gnome/$override /usr/share/glib-2.0/schemas/
+for override in $files/gnome/*; do
+	cp $override /usr/share/glib-2.0/schemas/
 done
 
 # prepare flatpak
@@ -60,7 +57,7 @@ cp $files/misc/20-connectivity-debian.conf /usr/lib/NetworkManager/conf.d/
 cp $files/misc/kbdlayout-custom /usr/share/xkeyboard-config-2/symbols/custom
 
 cp $files/misc/fontconfig-local.conf /etc/fonts/local.conf
-cp $files/misc/locale.conf /etc/locale.conf
+cp $files/misc/locale.conf /etc/
 
 # final steps
 
