@@ -1,41 +1,71 @@
 #!/usr/bin/env bash
 
-user_name=$(loginctl list-users -j | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user')
+user_name=$( \
+    loginctl list-users -j \
+    | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user' \
+)
+
+function update-available {
+    bootc upgrade --check \
+    | grep -qF "Update available"
+}
+
+function fetch-updates {
+    bootc upgrade --quiet
+}
+
+function power-saver-enabled {
+    busctl --user --machine=$user_name@.host \
+        get-property \
+        org.freedesktop.portal.Desktop \
+        /org/freedesktop/portal/desktop \
+        org.freedesktop.portal.PowerProfileMonitor \
+        power-saver-enabled \
+    | grep -qF "true"
+}
 
 function notify-restart {
     run0 -u "$user_name" \
     notify-send \
         --app-name="System Updates" \
         --app-icon="org.gnome.Settings-system-symbolic" \
-        --icon="software-update-available-symbolic" \
         --transient \
         --urgency=normal \
+        --action="Not Now" \
+        --action=restart="Restart" \
         "An update has been installed" \
         "A restart is required for it to take effect"
 }
 
-function power-saver-enabled {
-    run0 -u "$user_name" \
-    busctl --user get-property \
-        org.freedesktop.portal.Desktop \
-        /org/freedesktop/portal/desktop \
-        org.freedesktop.portal.PowerProfileMonitor \
-        power-saver-enabled \
-        | grep -qF "true"
+function restart-system {
+    busctl --user --machine=$user_name@.host \
+        call \
+        org.gnome.SessionManager \
+        /org/gnome/SessionManager \
+        org.gnome.SessionManager \
+        Reboot
 }
 
 if power-saver-enabled; then
     printf "Power saver enabled, not fetching updates"
     exit 0
 else
-    if bootc upgrade --check | grep -qF "Update available"; then
-        printf "Updates available, fetching"
-        bootc upgrade --quiet
+    if update-available; then
+        printf "Update available, fetching"
+        fetch-updates
         if [ $? -eq 0 ]; then
-            printf "Updates staged, notifying user"
-            notify-restart
+            printf "Update staged, notifying user"
+            action=$(notify-restart)
+            if [ $action = "restart" ]; then
+                restart-system
+            else
+                exit 0
+            fi
         else
             exit 1
         fi
+    else
+        printf "No update available"
+        exit 0
     fi
 fi
