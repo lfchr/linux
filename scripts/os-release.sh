@@ -8,7 +8,7 @@ set -euxo pipefail
 
 OS_NAME="Linux"
 OS_DESCRIPTION="Bootable Linux desktop container image"
-OS_VERSION="$(date +%Y.%m.%d)"
+OS_VERSION="$(date +%y.%m.%d)"
 BUILD="$(date -u +%H)F$(rpm -E %fedora)"
 
 # www.freedesktop.org/software/systemd/man/259/os-release.html
