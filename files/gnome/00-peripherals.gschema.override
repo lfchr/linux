@@ -9,6 +9,3 @@ tap-to-click=true
 
 [org.gnome.desktop.input-sources]
 xkb-options=['lv3:switch']
-
-[org.freedesktop.ibus.panel.emoji]
-unicode-hotkey=['<Control><Shift><Super>u']

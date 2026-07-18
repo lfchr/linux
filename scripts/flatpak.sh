@@ -29,6 +29,7 @@ default=(
     "org.gnome.NautilusPreviewer"
     "org.gnome.Loupe.HEIC"
     "dev.deedles.Trayscale"
+    "io.github.kolunmi.Bazaar"
     "ca.desrt.dconf-editor"
     "page.tesk.Refine"
 )

@@ -41,3 +41,6 @@ restart-enabled=true
 
 [org.gnome.desktop.notifications]
 show-in-lock-screen=false
+
+[org.freedesktop.ibus.panel.emoji]
+unicode-hotkey=['<Control><Shift><Super>u']

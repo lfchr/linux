@@ -1,5 +1,22 @@
 [org.gnome.shell]
-favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Papers.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Software.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Papers.desktop', 'org.gnome.Calculator.desktop', 'io.github.kolunmi.Bazaar.desktop']
 
 [org.gnome.desktop.app-folders]
 folder-children=['']
+
+# see ‘flatpak-apps-override.gschema.xml’
+
+[org.gnome.calculator]
+currency-display='both'
+favorite-currencies=['EUR', 'GBP', 'DKK', 'NOK', 'SEK', 'USD']
+
+[org.gnome.TextEditor]
+show-line-numbers=true
+spellcheck=false
+wrap-text=false
+
+[net.nokyan.Resources]
+processes-show-user=false
+show-virtual-network-interfaces=true
+sidebar-description=true
+sidebar-details=true
