@@ -6,16 +6,15 @@ set -euxo pipefail
 
 # description is used by makefile
 
-OS_NAME="Linux Bootable Container"
+OS_NAME="Linux"
 OS_DESCRIPTION="Bootable Linux desktop container image"
-OS_VERSION="26.7"
-
-BUILD="$(date +%Y.%m.%d)$(rpm -E %dist)"
+OS_VERSION="$(date +%Y.%m.%d)"
+BUILD="$(date -u +%H)F$(rpm -E %fedora)"
 
 # www.freedesktop.org/software/systemd/man/259/os-release.html
 
 cat > /usr/lib/os-release << EOF
-NAME="Linux"
+NAME="$OS_NAME"
 ID=linux
 ID_LIKE=$ID
 PRETTY_NAME="$OS_NAME $OS_VERSION"
@@ -28,14 +27,13 @@ RELEASE_TYPE="development"
 HOME_URL="https://github.com/lfchr/linux"
 BUG_REPORT_URL="https://gitlab.com/fedora/bootc/base-images/-/work_items"
 SUPPORT_END=$SUPPORT_END
-ANSI_COLOR="0;33"
+ANSI_COLOR="1;33"
 VENDOR_NAME="lfchr"
 DEFAULT_HOSTNAME="linux-????"
 EOF
 
 cat > /usr/lib/issue << EOF
-$OS_NAME $OS_VERSION
-build $BUILD \n \l
+$OS_NAME $OS_VERSION (build $BUILD) \l
 
 EOF
 
