@@ -25,6 +25,7 @@ mandatory=(
 
 default=(
     "org.gnome.NautilusPreviewer"
+    "org.gnome.Loupe.HEIC"
     "dev.deedles.Trayscale"
     "ca.desrt.dconf-editor"
     "page.tesk.Refine"

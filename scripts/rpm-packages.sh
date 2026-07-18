@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+# last edited 18 jul
+
 # don’t need openh264 as flatpaks are used for everything
 rm -f \
 /etc/yum.repos.d/fedora-cisco-openh264.repo \
@@ -146,8 +148,8 @@ multimedia=(
 
 # dnf group info printing
 # also printer-driver-brlaser ptouch-driver
-# the actual group is included in the ‘groups’ array below
-printing=(
+# mandatory and default are included in the ‘groups’ array below
+printing_optional=(
 "c2esp"
 "dymo-cups-drivers"
 "printer-driver-brlaser"
@@ -185,7 +187,6 @@ input_methods=(
 misc=(
 "tailscale"
 "rsms-inter-vf-fonts"
-"adobe-source-serif-pro-fonts"
 "google-noto-emoji-fonts"
 "fuse-overlayfs"
 "hfsplus-tools"
@@ -203,12 +204,42 @@ misc=(
 )
 
 # all mandatory and default:
+# dnf group info printing
 # dnf group info networkmanager-submodules
 # dnf group info fonts
 groups=(
-"@printing"
-"@networkmanager-submodules"
-"@fonts"
+"cups"
+"cups-filters"
+"ghostscript"
+"bluez-cups"
+"colord"
+"cups-browsed"
+"cups-pk-helper"
+"gutenprint"
+"gutenprint-cups"
+"hplip"
+"mpage"
+"nss-mdns"
+"paps"
+"samba-client"
+"system-config-printer-udev"
+"NetworkManager-bluetooth"
+"NetworkManager-wifi"
+"NetworkManager-wwan"
+"dnsmasq"
+"iptables-nft"
+"wpa_supplicant"
+"default-fonts-cjk-mono"
+"default-fonts-cjk-sans"
+"default-fonts-cjk-serif"
+"default-fonts-core-emoji"
+"default-fonts-core-math"
+"default-fonts-core-mono"
+"default-fonts-core-sans"
+"default-fonts-core-serif"
+"default-fonts-other-mono"
+"default-fonts-other-sans"
+"default-fonts-other-serif"
 )
 
 # dnf group info core
@@ -304,7 +335,7 @@ dnf in -y \
 ${gnome_desktop[@]} \
 ${hardware_support[@]} \
 ${multimedia[@]} \
-${printing[@]} \
+${printing_optional[@]} \
 ${container_management[@]} \
 ${input_methods[@]} \
 ${misc[@]} \
