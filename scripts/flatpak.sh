@@ -2,8 +2,10 @@
 
 set -euxo pipefail
 
-curl -L https://dl.flathub.org/repo/flathub.flatpakrepo -o /usr/share/flatpak/remotes.d/flathub.flatpakrepo
+curl -L 'https://dl.flathub.org/repo/flathub.flatpakrepo' \
+     -o '/usr/share/flatpak/remotes.d/flathub.flatpakrepo'
 
+# don’t forget to change Resources’ id when added to gnome’s core apps
 mandatory=(
     "org.gnome.baobab"
     "org.gnome.Calculator"

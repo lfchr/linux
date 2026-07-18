@@ -1,5 +1,7 @@
 [org.gnome.login-screen]
-enable-smartcard-authentication=false
+enable-fingerprint-authentication=false
 enable-passkey-authentication=false
-enable-web-authentication=false
+enable-passkey-authentication=true
+enable-smartcard-authentication=false
 enable-switchable-authentication=false
+enable-web-authentication=false
