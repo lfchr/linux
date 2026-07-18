@@ -3,7 +3,9 @@
 set -euxo pipefail
 
 # don’t need openh264 as flatpaks are used for everything
-rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo
+rm -f \
+/etc/yum.repos.d/fedora-cisco-openh264.repo \
+/etc/yum.repos.d/fedora-updates-testing.repo
 
 # hardware:
 # intel cpu/igpu

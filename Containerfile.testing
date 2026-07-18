@@ -1,5 +1,5 @@
 # this containerfile removes a bunch of steps to make building faster
-# for testing purposes. this also runs ‘scripts/testing.sh’ when
+# for testing purposes. this also runs ‘scripts/testing.sh’ before
 # preparing rootfs. build by running ‘make testimage’.
 
 ARG oci_base_name
