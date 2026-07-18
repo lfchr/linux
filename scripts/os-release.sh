@@ -33,8 +33,6 @@ VENDOR_NAME="lfchr"
 DEFAULT_HOSTNAME="linux-????"
 EOF
 
-echo "$OS_NAME" > /usr/lib/fedora-release
-
 cat > /usr/lib/issue << EOF
 $OS_NAME $OS_VERSION
 build $BUILD \n \l
@@ -46,5 +44,7 @@ rm -f \
 /etc/issue.net \
 /usr/lib/system-release-cpe \
 /etc/system-release-cpe \
+/usr/lib/fedora-release \
 /etc/fedora-release \
-/etc/redhat-release
+/etc/redhat-release \
+/etc/system-release

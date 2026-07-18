@@ -23,4 +23,5 @@ sed -i "s|^EFIDIR=.*|EFIDIR=\"fedora\"|" /usr/sbin/grub2-switch-to-blscfg
 
 sed -i 's/timeout_style=menu/timeout_style=hidden/g' /usr/lib/bootupd/grub2-static/grub-static-pre.cfg
 
-#sed -i 's/timeout=1/timeout=0/g' /usr/lib/bootupd/grub2-static/grub-static-pre.cfg
+# temporarily increased for testing purposes
+sed -i 's/timeout=1/timeout=5/g' /usr/lib/bootupd/grub2-static/grub-static-pre.cfg
