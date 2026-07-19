@@ -1,9 +1,9 @@
 IMAGE_NAME ?= localhost/linux:latest
-BASE_IMAGE := quay.io/fedora/fedora-bootc:44
-CHUNKAH := quay.io/coreos/chunkah:latest
+BASE_IMAGE ?= quay.io/fedora/fedora-bootc:44
+CHUNKAH ?= quay.io/coreos/chunkah:latest
 
-TEST_IMAGE_NAME ?= localhost/linux:testing
-TEST_BASE_IMAGE := quay.io/fedora/fedora-bootc:44
+TEST_IMAGE_NAME ?= $(IMAGE_NAME)
+TEST_BASE_IMAGE ?= $(BASE_IMAGE)
 
 IMAGE_URL = $(shell \
 	podman run --rm \
@@ -16,7 +16,7 @@ IMAGE_URL = $(shell \
 			echo "$$HOME_URL" \
 		' \
 )
-IMAGE_SOURCE = $(IMAGE_URL)
+IMAGE_SOURCE ?= $(IMAGE_URL)
 IMAGE_VENDOR = $(shell \
 	podman run --rm \
 		--volume $$(pwd):/run/src:ro \
