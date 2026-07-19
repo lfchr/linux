@@ -11,7 +11,7 @@ $scripts/rpm-packages.sh
 
 # prepare files
 
-cp -r $files/* /
+cp -Rfv $files/* /
 
 $scripts/remove-fedora-logos.sh
 $scripts/os-release.sh
