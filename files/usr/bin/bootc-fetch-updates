@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-user_name=$( \
-    loginctl list-users -j \
-    | jq -r '.[] | select(.state == "active") | select(.uid > 0) | .user' \
-)
+set -e
+
+if [ "$(id -u)" -ne 0 ]; then
+    echo 'please run as root'
+    exit 1
+fi
+
+user_name=$(id -nu 1000)
 
 function update-available {
     bootc upgrade --check \
@@ -15,7 +19,7 @@ function fetch-updates {
 }
 
 function power-saver-enabled {
-    busctl --user --machine=$user_name@.host \
+    busctl --user --machine="$user_name"@.host \
         get-property \
         org.freedesktop.portal.Desktop \
         /org/freedesktop/portal/desktop \
@@ -25,20 +29,47 @@ function power-saver-enabled {
 }
 
 function notify-restart {
-    run0 -u "$user_name" \
-    notify-send \
-        --app-name="System Updates" \
-        --app-icon="org.gnome.Settings-system-symbolic" \
-        --transient \
-        --urgency=normal \
-        --action="Not Now" \
-        --action=restart="Restart" \
+    busctl --user --machine="$user_name"@.host -- \
+        call \
+        org.freedesktop.Notifications \
+        /org/freedesktop/Notifications \
+        org.freedesktop.Notifications \
+        Notify \
+        susssasa{sv}i \
+        "System Updates" \
+        0 \
+        "org.gnome.Settings-system-symbolic" \
         "An update has been installed" \
-        "A restart is required for it to take effect"
+        "A restart is required for it to take effect" \
+        4 "0" "Not Now" "bootc-fetch-updates_restart" "Restart"\
+        1 "transient" b 1 \
+        -1
+}
+
+# the notification is transient and shouldn’t be visible for more than
+# a few seconds, but in case there is another notification blocking it
+# or the user is hovering over it, it can be visible for longer –
+# hence the 30s timeout.
+function notify-restart-action {
+    busctl --user --machine="$user_name"@.host \
+        monitor --limit-messages=1 --timeout=30s \
+        --match \
+        type='signal',interface='org.freedesktop.Notifications',member='ActionInvoked',arg1='bootc-fetch-updates_restart' \
+        | grep -qF 'bootc-fetch-updates_restart'
+}
+
+function notify-restart-close {
+    busctl --user --machine="$user_name"@.host \
+        call \
+        org.freedesktop.Notifications \
+        /org/freedesktop/Notifications \
+        org.freedesktop.Notifications \
+        CloseNotification \
+        u "$1"
 }
 
 function restart-system {
-    busctl --user --machine=$user_name@.host \
+    busctl --user --machine="$user_name"@.host \
         call \
         org.gnome.SessionManager \
         /org/gnome/SessionManager \
@@ -49,23 +80,24 @@ function restart-system {
 if power-saver-enabled; then
     printf "Power saver enabled, not fetching updates"
     exit 0
-else
-    if update-available; then
-        printf "Update available, fetching"
-        fetch-updates
-        if [ $? -eq 0 ]; then
-            printf "Update staged, notifying user"
-            action=$(notify-restart)
-            if [ $action = "restart" ]; then
-                restart-system
-            else
-                exit 0
-            fi
-        else
-            exit 1
-        fi
+fi
+
+if update-available; then
+    printf "Update available, fetching"
+    fetch-updates
+    
+    printf "Update staged, notifying user"
+    notif_id=$(notify-restart | awk '{print $2}')
+    if notify-restart-action; then
+        printf "Restarting system"
+        restart-system
+        exit 0
     else
-        printf "No update available"
+        printf "Not restarting system"
+        notify-restart-close "$notif_id"
         exit 0
     fi
+else
+    printf "No update available"
+    exit 0
 fi
