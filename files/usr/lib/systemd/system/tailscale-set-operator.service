@@ -6,7 +6,8 @@ BindsTo=tailscaled.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/tailscale set --operator=MAIN_USER
+ExecCondition=/usr/sbin/id -nu 1000
+ExecStart=/bin/sh -c '/usr/bin/tailscale set --operator=$(id -nu 1000)'
 ExecStartPost=/usr/bin/touch /var/lib/tailscale/.tailscale-initialized
 
 [Install]

@@ -1,5 +1,6 @@
 [org.gnome.shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Papers.desktop', 'org.gnome.Calculator.desktop', 'io.github.kolunmi.Bazaar.desktop']
+app-picker-layout=[]
 
 [org.gnome.desktop.app-folders]
 folder-children=['']

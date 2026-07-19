@@ -9,55 +9,14 @@ scripts=$(realpath $(dirname $0))
 
 $scripts/rpm-packages.sh
 
-$scripts/remove-fedora-logos.sh
-$scripts/os-release.sh
-
-cp $files/misc/bootc-fetch-updates /usr/bin/
-
 # prepare files
 
-## set the main user for the services that need it and copy services:
+cp -r $files/* /
 
-MAIN_USER=chr
-
-for service in $(ls $files/systemd/services); do
-	sed "s/MAIN_USER/$MAIN_USER/g" $files/systemd/services/$service > /usr/lib/systemd/system/$service
-done
-
-## other systemd files:
-
-cp $files/systemd/80-desktop.preset /usr/lib/systemd/system-preset/
-cp $files/systemd/zram-generator.conf /usr/lib/systemd/
-
-## dracut:
-
-for conf in $files/dracut/*; do
-	cp $conf /usr/lib/dracut/dracut.conf.d/
-done
-
-## gnome schemas:
-
-for override in $files/gnome/*; do
-	cp $override /usr/share/glib-2.0/schemas/
-done
-
-# prepare flatpak
-
+$scripts/remove-fedora-logos.sh
+$scripts/os-release.sh
 $scripts/flatpak.sh
-
-# copy misc. files
-
 $scripts/mimeapps.sh
-
-cp $files/misc/99-backlight-clamp.rules /usr/lib/udev/rules.d/
-cp $files/misc/bootc-kargs.toml /usr/lib/bootc/kargs.d/00-desktop.toml
-
-cp $files/misc/20-connectivity-debian.conf /usr/lib/NetworkManager/conf.d/
-
-cp $files/misc/kbdlayout-custom /usr/share/xkeyboard-config-2/symbols/custom
-
-cp $files/misc/fontconfig-local.conf /etc/fonts/local.conf
-cp $files/misc/locale.conf /etc/
 
 # final steps
 
