@@ -1,6 +1,5 @@
 # this containerfile removes a bunch of steps to make building faster
-# for testing purposes. this also runs ‘scripts/testing.sh’ before
-# preparing rootfs. build by running ‘make testimage’.
+# for testing purposes. build by running ‘make testimage’.
 
 ARG oci_base_name
 
@@ -15,7 +14,6 @@ RUN --mount=type=tmpfs,target=/run \
     --mount=type=tmpfs,target=/var \
     --mount=type=bind,from=baseconfig,src=/files,target=/run/files \
     --mount=type=bind,from=baseconfig,src=/scripts,target=/run/scripts \
-    /run/scripts/testing.sh \
     /run/scripts/prepare-rootfs.sh
 
 RUN bootc container lint --no-truncate

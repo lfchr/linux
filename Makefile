@@ -115,6 +115,7 @@ testimage:
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
+		--pull=never \
 		--build-arg=oci_base_name="$(TEST_BASE_IMAGE)" \
 		--file=Containerfile.testing \
 		.

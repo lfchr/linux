@@ -12,8 +12,9 @@ for repo in /etc/yum.repos.d/*; do
 	sed -i 's/enabled=1/enabled=0/g' $repo
 done
 
-systemctl set-default graphical.target
-systemctl preset-all
+#systemctl set-default graphical.target
+#systemctl preset-all
+rm -r /etc/systemd
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
