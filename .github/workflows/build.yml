@@ -16,6 +16,8 @@ jobs:
 
       - name: checkout
         uses: actions/checkout@v7
+        with:
+          ref: 'latest'
 
       - name: login
         run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
