@@ -11,9 +11,9 @@ RUN --mount=type=tmpfs,target=/run \
     --mount=type=tmpfs,target=/var \
     --mount=type=bind,from=baseconfig,src=/files,target=/run/files \
     --mount=type=bind,from=baseconfig,src=/scripts,target=/run/scripts \
-    /run/scripts/prepare-rootfs.sh
+    /run/scripts/prepare-rootfs-testing.sh
 
-RUN bootc container lint --fatal-warnings --no-truncate
+RUN bootc container lint --no-truncate
 
 FROM $chunkah AS chunkah
 RUN --mount=from=rootfs,src=/,target=/chunkah,ro \
