@@ -332,6 +332,11 @@ exclude=(
 "-x qemu-device-*"
 )
 
+testing=(
+"@guest-agents"
+"@guest-desktop-agents"
+)
+
 dnf in -y \
 ${gnome_desktop[@]} \
 ${hardware_support[@]} \

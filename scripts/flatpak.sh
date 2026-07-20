@@ -34,6 +34,11 @@ default=(
     "page.tesk.Refine"
 )
 
+testing=(
+    "org.gnome.dspy"
+    "com.github.tchx84.Flatseal"
+)
+
 groups=(
     "mandatory"
     "default"
