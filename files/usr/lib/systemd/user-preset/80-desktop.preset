@@ -1,1 +1,1 @@
-enable gnome-reset-app-grid.service
+enable gsettings-reset-schemas.service

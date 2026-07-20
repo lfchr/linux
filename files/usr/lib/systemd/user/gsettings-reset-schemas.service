@@ -1,5 +1,5 @@
 [Unit]
-Description=Reset app grid
+Description=Reset gsettings schemas
 
 BindsTo=gnome-session-shutdown.target
 Before=gnome-session-shutdown.target
@@ -9,8 +9,7 @@ ConditionEnvironment=XDG_SESSION_CLASS=user
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/gsettings reset org.gnome.shell app-picker-layout
-ExecStart=/usr/bin/gsettings reset org.gnome.desktop.app-folders folder-children
+ExecStart=/usr/bin/gsettings-reset-schemas
 
 [Install]
 WantedBy=gnome-session-shutdown.target
