@@ -77,9 +77,6 @@ IMAGE_VERSION = $(shell \
 )
 
 image:
-	podman pull $(BASE_IMAGE)
-	podman pull $(CHUNKAH)
-	
 	podman build \
 		--tag $(IMAGE_NAME) \
 		--skip-unused-stages=false \
