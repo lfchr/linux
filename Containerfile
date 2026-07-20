@@ -1,11 +1,11 @@
-ARG oci_base_name
+ARG base_image
 ARG chunkah
 
 FROM scratch AS baseconfig
 COPY files /files/
 COPY scripts /scripts/
 
-FROM $oci_base_name AS rootfs
+FROM $base_image AS rootfs
 RUN --mount=type=tmpfs,target=/run \
     --mount=type=tmpfs,target=/tmp \
     --mount=type=tmpfs,target=/var \
