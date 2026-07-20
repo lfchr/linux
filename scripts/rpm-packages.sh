@@ -185,7 +185,6 @@ input_methods=(
 # forge.fedoraproject.org/atomic-desktops/config/src/branch/main/silverblue-common.yaml
 # also some weak dependencies
 misc=(
-"git-core"
 "tailscale"
 "rsms-inter-vf-fonts"
 "google-noto-emoji-fonts"
