@@ -21,5 +21,3 @@ schemas=(
 for schema in ${schemas[@]}; do
     gsettings reset "$schema"
 done
-
-
