@@ -163,6 +163,7 @@ printing_optional=(
 # dnf group info container-management
 container_management=(
 "podman"
+"skopeo"
 "flatpak"
 "toolbox"
 )
