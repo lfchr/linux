@@ -18,6 +18,15 @@ systemctl set-default graphical.target
 systemctl preset-all --system
 systemctl preset-all --global
 
+localectl set-locale \
+    LANG=en_US.UTF-8 \
+    LC_NUMERIC=en_GB.UTF-8 \
+    LC_TIME=en_GB.UTF-8 \
+    LC_MONETARY=en_GB.UTF-8 \
+    LC_PAPER=en_GB.UTF-8 \
+    LC_MEASUREMENT=en_GB.UTF-8
+localectl set-x11-keymap customsv
+
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
 sed -i "s|^EFIDIR=.*|EFIDIR=\"fedora\"|" /usr/sbin/grub2-switch-to-blscfg
