@@ -7,4 +7,4 @@ disable-while-typing=false
 speed=0.25
 
 [org.gnome.desktop.input-sources]
-xkb-options=['lv3:switch']
+xkb-options=['lv3:lwin_switch']
