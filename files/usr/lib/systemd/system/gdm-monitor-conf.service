@@ -1,10 +1,11 @@
 [Unit]
-Description=Copy monitor configuration from main user to xdg for gdm
+Description=Link monitor configuration from main user to xdg for gdm
+ConditionPathExists=!/etc/xdg/monitors.xml
 Before=gdm.service
 
 [Service]
 ExecCondition=/bin/sh -c 'cat /home/$(id -nu 1000)/.config/monitors.xml'
-ExecStart=/bin/sh -c 'cp -u /home/$(id -nu 1000)/.config/monitors.xml /etc/xdg/monitors.xml'
+ExecStart=/bin/sh -c 'ln -s /home/$(id -nu 1000)/.config/monitors.xml /etc/xdg/monitors.xml'
 
 [Install]
 WantedBy=graphical.target
