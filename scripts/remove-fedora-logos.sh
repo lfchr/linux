@@ -18,7 +18,7 @@ rm -f \
 /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override
 
 # make sure only directories that only contain logos are removed
-rm -rf \
+rm -rfv \
 /usr/share/fedora-logos \
 /usr/share/anaconda \
 /usr/share/kde4 \
