@@ -1,59 +1,66 @@
 partial alphanumeric_keys
 xkb_symbols "mac-iso-custom" {
     include "us(mac-iso)"
-    name[Group1] = "English (Custom, Swedish)";
+    name[Group1] = "English (Custom)";
     
     key.type[group1]="EIGHT_LEVEL";
     // movement and editing — all from emacs
     key <AC06> { [any,any,any,any,BackSpace,BackSpace] };
-    key <AC03> { [any,any,any,any,Delete,Delete] };
-    key <AC07> { [any,any,any,any,Return,Return] };
-	key <AC05> { [any,any,any,any,Escape,Escape] };
-    key <AD10> { [any,any,any,any,Up,Up] };
-    key <AB06> { [any,any,any,any,Down,Down] };
-    key <AB05> { [any,any,any,any,Left,Left] };
-    key <AC04> { [any,any,any,any,Right,Right] };
-    key <AD03> { [any,any,any,any,End,End] };
-    key <AC01> { [any,any,any,any,Home,Home] };
-    key <AB04> { [any,any,any,any,Next,Next] };
-    key <AB03> { [any,any,any,any,Prior,Prior] }; // not from emacs. wanted separate key for scrolling up
-    
-    // proper typography
-    key <AE11> { [any,any,any,any,endash] };
-    key <AB07> { [any,any,any,any,emdash] };
-    key <AB09> { [any,any,any,any,U2026] }; // ellipsis ‘…’
+    key <AC03> { [any,any,any,any,Delete,   Delete] };
+    key <AC07> { [any,any,any,any,Return,   Return] };
+	key <AC05> { [any,any,any,any,Escape,   Escape] };
+    key <AD10> { [any,any,any,any,Up,       Up] };
+    key <AB06> { [any,any,any,any,Down,     Down] };
+    key <AB05> { [any,any,any,any,Left,     Left] };
+    key <AC04> { [any,any,any,any,Right,    Right] };
+    key <AD03> { [any,any,any,any,End,      End] };
+    key <AC01> { [any,any,any,any,Home,     Home] };
+    key <AB04> { [any,any,any,any,Next,     Next] };   //  not from emacs, but i
+    key <AB03> { [any,any,any,any,Prior,    Prior] }; // ← wanted a separate key
+                                                     //    for scrolling up
+    // misc.
+    // parentheses that are easier to reach on u,i
+    key <AD07> { [any,any,any,any,parenleft] };
+    key <AD08> { [any,any,any,any,parenright] };
+    // multiply on /
     key <AB10> { [any,any,any,any,multiply] };
-    key <AE07> { [any,any,any,any,leftarrow] };
-    key <AE08> { [any,any,any,any,downarrow] };
-    key <AE09> { [any,any,any,any,uparrow] };
-    key <AE10> { [any,any,any,any,rightarrow] };
-    key <AC08> { [any,any,any,any,leftsinglequotemark] };
-    key <AC09> { [any,any,any,any,rightsinglequotemark] };
-    key <AD08> { [any,any,any,any,leftdoublequotemark] };
-    key <AD09> { [any,any,any,any,rightdoublequotemark] };
-    key <SPCE> { [any,any,nobreakspace,U202F] }; // narrow nbsp
+    // vertical arrows ↓,↑ on k
+    key <AC08> { [any,any,any,any,downarrow,uparrow] };
+    // horizontal arrows →,← on l
+    key <AC09> { [any,any,any,any,rightarrow,leftarrow] };
+    // nbsp and narrow nbsp
+    key <SPCE> { [any,any,nobreakspace,U202F] };
     
     // swedish characters
-    key <AC10> { [odiaeresis,Odiaeresis,semicolon,colon,colon] };
-    key <AD11> { [aring,Aring,bracketleft,braceleft,braceleft] };
-    key <AC11> { [adiaeresis,Adiaeresis,apostrophe,quotedbl,quotedbl] };
-    key <AD12> { [any,any,bracketright,braceright,braceright] };
-    
-    // misc.
-    key <TLDE> { [grave,asciitilde,dead_grave,dead_horn] }; // include "level3(lsgt_switch)"
+    key <AC10> { [odiaeresis,Odiaeresis,any,any,semicolon,   colon] };
+    key <AD11> { [aring,     Aring,     any,any,bracketleft, braceleft] };
+    key <AC11> { [adiaeresis,Adiaeresis,any,any,apostrophe,  quotedbl] };
+    key <AD12> { [any,       any,       any,any,bracketright,braceright] };
 
     include "level5(caps_switch)"
-    include "custom(mac-modifiers)"
-    include "level3(lsgt_switch)"
+    include "custom(mac-iso-custom-modifiers)"
     include "shift(both_capslock)"
-    // gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swap_lalt_lctl_lwin','ctrl:swap_ralt_rctl']"
 };
 
 partial modifier_keys
-xkb_symbols "mac-modifiers" {
-    include "ctrl(swap_lalt_lctl_lwin)"
-    include "ctrl(ralt_rctrl)"
-    include "level3(switch)"
-    // also change alternate characters key in Settings → Keyboard to right ctrl:
-    // gsettings set org.gnome.desktop.input-sources xkb-options "['lv3:switch']"
+xkb_symbols "mac-iso-custom-modifiers" {
+
+    // 1     -     2     3     -     4     5    | 6
+    // ctrl  (fn)  super alt   (spc) altgr ctrl | ins
+    // alt   (fn)  altgr ctrl  (spc) ctrl  alt  | super
+    
+    // 1, 3
+    include "ctrl(swap_lalt_lctl)"
+    // 4, 5
+    include "ctrl(swap_ralt_rctl)"
+    // 2
+    include "level3(lwin_switch)"
+    // 6
+    key <INS> {[  Super_L  ]};
+    modifier_map Mod4 { <INS> };
+
+    // also change alternate characters key in 
+    // Settings → Keyboard to ‘left super’.
+    // gsettings set org.gnome.desktop.input-sources \
+    // xkb-options "['lv3:lwin_switch']"
 };
