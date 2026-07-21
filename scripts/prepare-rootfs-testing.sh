@@ -37,6 +37,18 @@ sed -i -e '/^! layout/a\
   testing         A test user-defined test Layout test' \
 /usr/share/xkeyboard-config-2/rules/base.lst
 
+sed -i -e '/^  <\/layoutList>/i\
+    <name>testing</name>\
+        <shortDescription>testing</shortDescription>\
+        <description>A test user-defined test Layout test</description>\
+        <languageList>\
+          <iso639Id>und</iso639Id>\
+        </languageList>\
+      </configItem>\
+      <variantList/>\
+    </layout>' \
+/usr/share/xkeyboard-config-2/rules/base.xml
+
 rm -f \
 /usr/lib/dracut/dracut.conf.d/30-intel.conf \
 /usr/lib/dracut/dracut.conf.d/30-omit-various.conf
