@@ -37,4 +37,8 @@ sed -i -e '/^! layout/a\
   testing         A test user-defined test Layout test' \
 /usr/share/xkeyboard-config-2/rules/base.lst
 
+rm -f \
+/usr/lib/dracut/dracut.conf.d/30-intel.conf \
+/usr/lib/dracut/dracut.conf.d/30-omit-various.conf
+
 $scripts/rebuild-initrd.sh
