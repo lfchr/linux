@@ -31,13 +31,20 @@ $scripts/mimeapps.sh
 
 $scripts/finalize.sh
 
-# test: add new keyboard layout
+# test: add new keyboard layout. confirmed localectl sees this
+# but gnome doesn’t
 mv /usr/share/xkeyboard-config-2/symbols/custom /usr/share/xkeyboard-config-2/symbols/testing
 sed -i -e '/^! layout/a\
   testing         A test user-defined test Layout test' \
 /usr/share/xkeyboard-config-2/rules/base.lst
 
-sed -i -e '/^  <\/layoutList>/i\
+# systemd-localed checks the base.lst above so if xml can be avoided it would be easier
+sed -i -e '/^! layout/a\
+  testing         A test user-defined test Layout test' \
+/usr/share/xkeyboard-config-2/rules/evdev.lst
+
+# temporarily disabling this by removing -i
+sed -e '/^  <\/layoutList>/i\
     <name>testing</name>\
         <shortDescription>testing</shortDescription>\
         <description>A test user-defined test Layout test</description>\
