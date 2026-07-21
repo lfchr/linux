@@ -4,13 +4,15 @@ set -euxo pipefail
 
 cat > /usr/share/gnome-initial-setup/vendor.conf << 'EOF'
 [pages]
-skip=software
+skip=language;keyboard;privacy;software;parental-controls
 EOF
 
 # disable all rpm repositories so they don’t show up in gnome software
 for repo in /etc/yum.repos.d/*; do
 	sed -i 's/enabled=1/enabled=0/g' $repo
 done
+
+echo 'NoDisplay=true' >> /usr/share/applications/org.freedesktop.MalcontentControl.desktop
 
 systemctl set-default graphical.target
 systemctl preset-all --system
