@@ -31,4 +31,10 @@ $scripts/mimeapps.sh
 
 $scripts/finalize.sh
 
+# test: add new keyboard layout
+mv /usr/share/xkeyboard-config-2/symbols/custom /usr/share/xkeyboard-config-2/symbols/testing
+sed -i -e '/^! layout/a\
+  testing         A test user-defined test Layout test' \
+/usr/share/xkeyboard-config-2/rules/base.lst
+
 $scripts/rebuild-initrd.sh
