@@ -11,7 +11,7 @@ RUN --mount=type=tmpfs,target=/run \
     --mount=type=tmpfs,target=/var \
     --mount=type=bind,from=baseconfig,src=/files,target=/run/files \
     --mount=type=bind,from=baseconfig,src=/scripts,target=/run/scripts \
-    /run/scripts/prepare-rootfs-testing.sh
+    /run/scripts/prepare-rootfs.sh
 
 RUN bootc container lint --no-truncate
 

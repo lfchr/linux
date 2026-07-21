@@ -1,0 +1,22 @@
+# this containerfile removes a bunch of steps to make building faster
+# build by running ‘make fast’
+
+ARG base_image
+
+FROM scratch AS baseconfig
+COPY files /files/
+COPY scripts /scripts/
+
+FROM $base_image AS rootfs
+
+RUN --mount=type=tmpfs,target=/run \
+    --mount=type=tmpfs,target=/tmp \
+    --mount=type=tmpfs,target=/var \
+    --mount=type=bind,from=baseconfig,src=/files,target=/run/files \
+    --mount=type=bind,from=baseconfig,src=/scripts,target=/run/scripts \
+    /run/scripts/prepare-rootfs.sh
+
+RUN bootc container lint --no-truncate
+
+LABEL containers.bootc=1
+

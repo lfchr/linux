@@ -109,8 +109,41 @@ image:
 		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
 		.
 
+image-testing:
+	podman build \
+		--tag $(IMAGE_NAME) \
+		--skip-unused-stages=false \
+		--volume $$(pwd):/run/src \
+		--security-opt=label=disable \
+		\
+		--build-arg=base_image="$(BASE_IMAGE)" \
+		--build-arg=chunkah="$(CHUNKAH)" \
+		\
+		--build-arg=oci_created="$(IMAGE_CREATED)" \
+		--build-arg=oci_url="$(IMAGE_URL)" \
+		--build-arg=oci_source="$(IMAGE_SOURCE)" \
+		--build-arg=oci_version="$(IMAGE_VERSION)" \
+		--build-arg=oci_vendor="$(IMAGE_VENDOR)" \
+		--build-arg=oci_licenses="MIT" \
+		--build-arg=oci_title="$(IMAGE_TITLE)" \
+		--build-arg=oci_description="$(IMAGE_DESCRIPTION)" \
+		--build-arg=oci_base_digest="$(BASE_DIGEST)" \
+		--build-arg=oci_base_name="$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
+		--annotation="containers.bootc=1" \
+		--annotation="org.opencontainers.image.created=$(IMAGE_CREATED)" \
+		--annotation="org.opencontainers.image.url=$(IMAGE_URL)" \
+		--annotation="org.opencontainers.image.source=$(IMAGE_SOURCE)" \
+		--annotation="org.opencontainers.image.version=$(IMAGE_VERSION)" \
+		--annotation="org.opencontainers.image.vendor=$(IMAGE_VENDOR)" \
+		--annotation="org.opencontainers.image.licenses=MIT" \
+		--annotation="org.opencontainers.image.title=$(IMAGE_TITLE)" \
+		--annotation="org.opencontainers.image.description=$(IMAGE_DESCRIPTION)" \
+		--annotation="org.opencontainers.image.base.digest=$(BASE_DIGEST)" \
+		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
+		--file=Containerfile.testing \
+		.
 
-testimage:
+fast:
 	podman build \
 		--tag $(IMAGE_NAME) \
 		--skip-unused-stages=false \
@@ -118,5 +151,5 @@ testimage:
 		--security-opt=label=disable \
 		--pull=never \
 		--build-arg=base_image="$(BASE_IMAGE)" \
-		--file=Containerfile.testing \
+		--file=Containerfile.fast \
 		.
