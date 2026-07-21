@@ -49,8 +49,6 @@ sed -i -e '/^  <\/layoutList>/i\
     </layout>' \
 /usr/share/xkeyboard-config-2/rules/base.xml
 
-rm -f \
-/usr/lib/dracut/dracut.conf.d/30-intel.conf \
-/usr/lib/dracut/dracut.conf.d/30-omit-various.conf
+rm -f /usr/lib/dracut/dracut.conf.d/30-intel.conf
 
 $scripts/rebuild-initrd.sh
