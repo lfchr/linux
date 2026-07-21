@@ -1,0 +1,41 @@
+# as organised in Settings → Keyboard → Keyboard Shortcuts
+# navigation
+[org.gnome.desktop.wm.keybindings]
+move-to-monitor-left=[]
+move-to-monitor-right=[]
+switch-to-workspace-last=[]
+switch-to-workspace-1=[]
+switch-to-workspace-left=['<Super>Left']
+switch-to-workspace-right=['<Super>Right']
+switch-windows=['<Control>Tab']
+switch-windows-backward=['<Shift><Control>Tab']
+switch-group=['<Control>Above_Tab']
+switch-group-backward=['<Shift><Control>Above_Tab']
+
+# screenshots
+[org.gnome.shell.keybindings]
+show-screen-recording-ui=[]
+screenshot=['<Shift><Control>3']
+show-screenshot-ui=['<Shift><Control>4']
+screenshot-window=[]
+
+# system
+[org.gnome.shell.keybindings]
+focus-active-notification=[]
+toggle-quick-settings=['<Super>c']
+toggle-message-tray=['<Super>n']
+toggle-overview=['<Control>space']
+
+[org.gnome.settings-daemon.plugins.media-keys]
+screensaver=['<Control><Super>q']
+logout=['<Shift><Control>q']
+
+# windows
+[org.gnome.desktop.wm.keybindings]
+close=['<Super>q']
+maximize=['<Control><Super>f']
+unmaximize=['<Control><Super>r']
+
+[org.gnome.mutter.keybindings]
+toggle-tiled-left=['<Control><Super>Left']
+toggle-tiled-right=['<Control><Super>Right']
