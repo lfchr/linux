@@ -3,6 +3,7 @@ xkb_symbols "basic" {
     include "custombase(basic)"
     
     name[Group1]="Swedish (Custom)";
+    key.type[group1]="EIGHT_LEVEL";
     
     key <AC10> { [odiaeresis,Odiaeresis,any,any,semicolon,   colon] };
     key <AD11> { [aring,     Aring,     any,any,bracketleft, braceleft] };

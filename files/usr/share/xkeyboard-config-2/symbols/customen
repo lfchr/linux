@@ -3,9 +3,10 @@ xkb_symbols "basic" {
     include "custombase(basic)"
     
     name[Group1]="English (Custom)";
+    key.type[group1]="EIGHT_LEVEL";
     
     key <AC10> { [semicolon,   colon,    any,any,odiaeresis,Odiaeresis] };
     key <AD11> { [bracketleft, braceleft,any,any,aring,     Aring] };
     key <AC11> { [apostrophe,  quotedbl, any,any,adiaeresis,Adiaeresis] };
-    key <AD12> { [bracketright,braceright] };
+    key <AD12> { [bracketright,braceright,any,any,any,any] };
 };

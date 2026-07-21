@@ -1,13 +1,10 @@
 default partial alphanumeric_keys
 xkb_symbols "basic" {
     include "us(mac-iso)"
-    include "level5(caps_switch)"
-    include "custombase(mac-iso-custom-modifiers)"
-    include "shift(both_capslock)"
     
     name[Group1] = "Custom";
-    
     key.type[group1]="EIGHT_LEVEL";
+    
     // movement and editing — all from emacs
     key <AC06> { [any,any,any,any,BackSpace,BackSpace] };
     key <AC03> { [any,any,any,any,Delete,   Delete] };
@@ -33,11 +30,15 @@ xkb_symbols "basic" {
     // horizontal arrows →,← on l
     key <AC09> { [any,any,any,any,rightarrow,leftarrow] };
     // nbsp and narrow nbsp
-    key <SPCE> { [any,any,nobreakspace,U202F] };
+    key <SPCE> { [space,space,nobreakspace,U202F] };
+    
+    include "custombase(mac-iso-custom-modifiers)"
 };
 
 partial modifier_keys
 xkb_symbols "mac-iso-custom-modifiers" {
+    include "level5(caps_switch)"
+    include "shift(both_capslock)"
     // 1     -     2     3     -     4     5
     // ctrl  (fn)  super alt   (spc) altgr ctrl
     // super (fn)  altgr ctrl  (spc) ctrl  alt
