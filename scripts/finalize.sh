@@ -4,7 +4,7 @@ set -euxo pipefail
 
 cat > /usr/share/gnome-initial-setup/vendor.conf << 'EOF'
 [pages]
-skip=language;keyboard;privacy;software;parental-controls
+skip=language;privacy;software;parental-controls
 EOF
 
 # disable all rpm repositories so they don’t show up in gnome software

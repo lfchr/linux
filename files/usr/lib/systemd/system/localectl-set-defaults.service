@@ -1,0 +1,15 @@
+[Unit]
+Description=Set default locale and keymap
+ConditionPathExists=!/etc/X11/xorg.conf.d/00-keyboard.conf
+Before=graphical.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=10
+ExecStart=/usr/bin/localectl set-locale LANG=en_US.UTF-8 LC_NUMERIC=en_GB.UTF-8 LC_TIME=en_GB.UTF-8 LC_MONETARY=en_GB.UTF-8 LC_PAPER=en_GB.UTF-8 LC_MEASUREMENT=en_GB.UTF-8
+ExecStartPost=/usr/bin/localectl set-x11-keymap customen
+
+[Install]
+WantedBy=multi-user.target
