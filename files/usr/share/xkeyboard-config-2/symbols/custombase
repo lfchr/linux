@@ -38,20 +38,23 @@ xkb_symbols "basic" {
 
 partial modifier_keys
 xkb_symbols "mac-iso-custom-modifiers" {
-
-    // 1     -     2     3     -     4     5    | 6
-    // ctrl  (fn)  super alt   (spc) altgr ctrl | ins
-    // alt   (fn)  altgr ctrl  (spc) ctrl  alt  | super
+    // 1     -     2     3     -     4     5
+    // ctrl  (fn)  super alt   (spc) altgr ctrl
+    // super (fn)  altgr ctrl  (spc) ctrl  alt
     
     // 1, 3
-    include "ctrl(swap_lalt_lctl)"
+    replace key <LCTL> { [ Super_L ] };
+    replace key <LALT> { [ Control_L, Control_L ] };
+    modifier_map Mod4    { <LCTL> };
+    modifier_map Control { <LALT> };
     // 4, 5
-    include "ctrl(swap_ralt_rctl)"
+    // some things always expect the left keys…
+    replace key <RALT> { [ Control_L, Control_L ] };
+    replace key <RCTL> { [ Alt_L, Meta_L ] };
+    modifier_map Mod1    { <RCTL> };
+    modifier_map Control { <RALT> };
     // 2
     include "level3(lwin_switch)"
-    // 6
-    key <INS> {[  Super_L  ]};
-    modifier_map Mod4 { <INS> };
 
     // also change alternate characters key in 
     // Settings → Keyboard to ‘left super’.
