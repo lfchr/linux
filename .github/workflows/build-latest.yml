@@ -24,7 +24,10 @@ jobs:
         run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
 
       - name: build
-        run: make IMAGE_NAME="ghcr.io/${{ github.repository }}:latest" IMAGE_SOURCE='https://github.com/lfchr/linux/tree/latest' image
+        run: |
+          IMAGE_NAME="ghcr.io/${{ github.repository }}:latest" \
+          IMAGE_SOURCE="https://github.com/${{ github.repository }}/tree/latest" \
+          make image
 
       - name: push
         run: podman push ghcr.io/${{ github.repository }}:latest
