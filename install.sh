@@ -8,9 +8,9 @@ set -ex
 # 2         1.5gib  /mnt/boot/      ext4
 # 3         all     /mnt/           btrfs
 
-tag='ghcr.io/lfchr/linux:latest'
+source_img='ghcr.io/lfchr/linux:latest'
 
-podman pull $tag
+podman pull $source_img
 podman run \
     --rm \
     --privileged \
@@ -20,9 +20,9 @@ podman run \
     -v /var/lib/containers:/var/lib/containers \
     -v /dev:/dev \
     -v /:/run/host \
-    $tag \
+    $source_img \
         bootc install to-filesystem \
-            --source-imgref=registry:$tag \
+            --source-imgref=containers-storage:$source_img \
             --skip-finalize \
             /run/host/mnt/
 
