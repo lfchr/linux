@@ -4,7 +4,7 @@ set -euxo pipefail
 
 cat > /usr/share/gnome-initial-setup/vendor.conf << 'EOF'
 [pages]
-skip=language;privacy;software;parental-controls
+skip=language;keyboard;privacy;software;parental-controls
 EOF
 
 # disable all rpm repositories so they don’t show up in gnome software
@@ -17,15 +17,6 @@ echo 'NoDisplay=true' >> /usr/share/applications/org.freedesktop.MalcontentContr
 systemctl set-default graphical.target
 systemctl preset-all --system
 systemctl preset-all --global
-
-localectl set-locale \
-    LANG=en_US.UTF-8 \
-    LC_NUMERIC=en_GB.UTF-8 \
-    LC_TIME=en_GB.UTF-8 \
-    LC_MONETARY=en_GB.UTF-8 \
-    LC_PAPER=en_GB.UTF-8 \
-    LC_MEASUREMENT=en_GB.UTF-8
-localectl set-x11-keymap customsv
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
