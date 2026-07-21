@@ -44,7 +44,7 @@ sed -i -e '/^! layout/a\
 /usr/share/xkeyboard-config-2/rules/evdev.lst
 
 # temporarily disabling this by removing -i
-sed -e '/^  <\/layoutList>/i\
+sed -i -e '/^  <\/layoutList>/i\
     <name>testing</name>\
         <shortDescription>testing</shortDescription>\
         <description>A test user-defined test Layout test</description>\

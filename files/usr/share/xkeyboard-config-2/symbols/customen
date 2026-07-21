@@ -1,0 +1,11 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    include "custombase(basic)"
+    
+    name[Group1]="English (Custom)";
+    
+    key <AC10> { [semicolon,   colon,    any,any,odiaeresis,Odiaeresis] };
+    key <AD11> { [bracketleft, braceleft,any,any,aring,     Aring] };
+    key <AC11> { [apostrophe,  quotedbl, any,any,adiaeresis,Adiaeresis] };
+    key <AD12> { [bracketright,braceright] };
+};

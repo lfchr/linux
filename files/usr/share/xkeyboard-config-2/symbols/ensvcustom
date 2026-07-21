@@ -1,14 +1,18 @@
-partial alphanumeric_keys
-xkb_symbols "mac-iso-custom" {
+default partial alphanumeric_keys
+xkb_symbols "basic" {
     include "us(mac-iso)"
-    name[Group1] = "English (Custom)";
+    include "level5(caps_switch)"
+    include "ensvcustom(mac-iso-custom-modifiers)"
+    include "shift(both_capslock)"
+    
+    name[Group1] = "Custom (English)";
     
     key.type[group1]="EIGHT_LEVEL";
     // movement and editing — all from emacs
     key <AC06> { [any,any,any,any,BackSpace,BackSpace] };
     key <AC03> { [any,any,any,any,Delete,   Delete] };
     key <AC07> { [any,any,any,any,Return,   Return] };
-	key <AC05> { [any,any,any,any,Escape,   Escape] };
+    key <AC05> { [any,any,any,any,Escape,   Escape] };
     key <AD10> { [any,any,any,any,Up,       Up] };
     key <AB06> { [any,any,any,any,Down,     Down] };
     key <AB05> { [any,any,any,any,Left,     Left] };
@@ -36,10 +40,6 @@ xkb_symbols "mac-iso-custom" {
     key <AD11> { [aring,     Aring,     any,any,bracketleft, braceleft] };
     key <AC11> { [adiaeresis,Adiaeresis,any,any,apostrophe,  quotedbl] };
     key <AD12> { [any,       any,       any,any,bracketright,braceright] };
-
-    include "level5(caps_switch)"
-    include "custom(mac-iso-custom-modifiers)"
-    include "shift(both_capslock)"
 };
 
 partial modifier_keys
@@ -64,3 +64,15 @@ xkb_symbols "mac-iso-custom-modifiers" {
     // gsettings set org.gnome.desktop.input-sources \
     // xkb-options "['lv3:lwin_switch']"
 };
+
+partial alphanumeric_keys
+xkb_symbols "sv" {
+    include "ensvcustom(basic)"
+    
+    name[Group1]="Custom (Swedish)";
+    
+    key <AC10> { [odiaeresis,Odiaeresis,any,any,semicolon,   colon] };
+    key <AD11> { [aring,     Aring,     any,any,bracketleft, braceleft] };
+    key <AC11> { [adiaeresis,Adiaeresis,any,any,apostrophe,  quotedbl] };
+    key <AD12> { [any,       any,       any,any,bracketright,braceright] };
+
