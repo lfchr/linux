@@ -1,5 +1,6 @@
 [org.gnome.shell]
 disable-user-extensions=true
+last-selected-power-profile='power-saver'
 
 [org.gnome.desktop.wm.preferences]
 button-layout='close,appmenu:'

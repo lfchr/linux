@@ -3,6 +3,7 @@
 set -ex
 
 schemas=(
+    'org.gnome.shell last-selected-power-profile'
     'org.gnome.shell app-picker-layout'
     'org.gnome.desktop.app-folders folder-children'
     'org.gnome.settings-daemon.plugins.power idle-dim'
