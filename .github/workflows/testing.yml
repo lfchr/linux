@@ -9,7 +9,6 @@ jobs:
   build-push:
     uses: ./.github/workflows/build-push-ghcr.yml
     with:
-      image-repo: ${{ github.repository }}
       image-tag: testing
       ghcr-user: ${{ github.actor }}
     secrets:

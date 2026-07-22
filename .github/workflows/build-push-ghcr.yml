@@ -3,9 +3,6 @@ name: build image and push to ghcr
 on:
   workflow_call:
     inputs:
-      image-repo:
-        required: true
-        type: string
       image-tag:
         required: true
         type: string
@@ -26,7 +23,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v7
         with:
-          repository: ${{ inputs.image-repo }}
+          repository: lfchr/linux
           ref: ${{ inputs.image-tag }}
 
       - name: login
@@ -34,8 +31,8 @@ jobs:
 
       - name: build
         run: |
-          IMAGE_NAME="ghcr.io/${{ inputs.image-repo }}:${{ inputs.image-tag }}" \
+          IMAGE_NAME="ghcr.io/lfchr/linux:${{ inputs.image-tag }}" \
           make image
 
       - name: push
-        run: podman push ghcr.io/${{ inputs.image-repo }}:${{ inputs.image-tag }}
+        run: podman push ghcr.io/lfchr/linux:${{ inputs.image-tag }}
