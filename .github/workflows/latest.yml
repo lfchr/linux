@@ -12,4 +12,5 @@ jobs:
       image-repo: ${{ github.repository }}
       image-tag: latest
       ghcr-user: ${{ github.actor }}
+    secrets:
       ghcr_token: ${{ secrets.GITHUB_TOKEN }}
