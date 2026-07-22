@@ -76,7 +76,7 @@ IMAGE_VERSION = $(shell \
 		' \
 )
 
-image:
+image-latest:
 	podman build \
 		--tag $(IMAGE_NAME) \
 		--skip-unused-stages=false \

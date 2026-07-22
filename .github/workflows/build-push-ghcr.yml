@@ -32,7 +32,7 @@ jobs:
       - name: build
         run: |
           IMAGE_NAME="ghcr.io/lfchr/linux:${{ inputs.image-tag }}" \
-          make image
+          make image-${{ inputs.image-tag }}
 
       - name: push
         run: podman push ghcr.io/lfchr/linux:${{ inputs.image-tag }}
