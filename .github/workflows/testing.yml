@@ -3,7 +3,7 @@ name: build testing
 on:
   push:
     tags: 
-      - tesing
+      - testing
 
 jobs:
   build-push:
