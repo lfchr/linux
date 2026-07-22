@@ -50,6 +50,8 @@ sed -i -e '/^    <\/engines>/i\
         <engine>\
             <name>xkb:customen::eng</name>\
             <language>en</language>\
+            <license>GPL</license>\
+            <author>Peng Huang &lt;shawn.p.huang@gmail.com&gt;</author>\
             <layout>customen</layout>\
             <longname>English (Custom)</longname>\
             <description>English (Custom)</description>\
@@ -59,6 +61,8 @@ sed -i -e '/^    <\/engines>/i\
         <engine>\
             <name>xkb:customsv::swe</name>\
             <language>sv</language>\
+            <license>GPL</license>\
+            <author>Peng Huang &lt;shawn.p.huang@gmail.com&gt;</author>\
             <layout>customsv</layout>\
             <longname>Swedish (Custom)</longname>\
             <description>Swedish (Custom)</description>\
