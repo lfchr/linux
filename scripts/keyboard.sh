@@ -46,6 +46,27 @@ for list in 'base' 'evdev'; do
   /usr/share/xkeyboard-config-2/rules/$list.lst
 done
 
+sed -i -e '/^    <\/engines>/i\
+        <engine>\
+            <name>xkb:customen::eng</name>\
+            <language>en</language>\
+            <layout>customen</layout>\
+            <longname>English (Custom)</longname>\
+            <description>English (Custom)</description>\
+            <icon>ibus-keyboard</icon>\
+            <rank>50</rank>\
+        </engine>\
+        <engine>\
+            <name>xkb:customsv::swe</name>\
+            <language>sv</language>\
+            <layout>customsv</layout>\
+            <longname>Swedish (Custom)</longname>\
+            <description>Swedish (Custom)</description>\
+            <icon>ibus-keyboard</icon>\
+            <rank>50</rank>\
+        </engine>' \
+/usr/share/ibus/component/simple.xml
+
 # see src.fedoraproject.org/rpms/kbd/blob/rawhide/f/kbd.spec
 
 dnf in -y console-setup
