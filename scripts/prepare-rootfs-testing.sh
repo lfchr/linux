@@ -26,7 +26,7 @@ sed -e '/^groups=(/a\
 $scripts/flatpak.sh | bash
 
 $scripts/mimeapps.sh
-$scripts/keyboard-layout.sh
+$scripts/keyboard.sh
 
 # final steps
 

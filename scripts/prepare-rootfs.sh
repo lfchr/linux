@@ -17,7 +17,7 @@ $scripts/remove-fedora-logos.sh
 $scripts/os-release.sh
 $scripts/flatpak.sh
 $scripts/mimeapps.sh
-$scripts/keyboard-layout.sh
+$scripts/keyboard.sh
 
 # final steps
 
