@@ -2,7 +2,9 @@
 
 set -euxo pipefail
 
-for file in 'base' 'evdev'; do
+files=$(realpath $(dirname $0)/../files)
+
+for list in 'base' 'evdev'; do
   sed -i -e '/^  <\/layoutList>/i\
     <layout>\
       <configItem>\
@@ -36,10 +38,10 @@ for file in 'base' 'evdev'; do
       </configItem>\
       <variantList/>\
     </layout>' \
-  /usr/share/xkeyboard-config-2/rules/$file.xml
+  /usr/share/xkeyboard-config-2/rules/$list.xml
   
   sed -i -e '/^! layout/a\
   customen        English (Custom)\
   customsv        Swedish (Custom)' \
-  /usr/share/xkeyboard-config-2/rules/$file.lst
+  /usr/share/xkeyboard-config-2/rules/$list.lst
 done
