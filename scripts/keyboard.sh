@@ -71,8 +71,6 @@ sed -i -e '/^    <\/engines>/i\
 
 dnf in -y console-setup
 
-mkdir /tmp/ckbcomp_custom_layouts/
-
 for layout in 'customen' 'customsv'; do
     ckbcomp -rules base "$layout" \
     | gzip > /usr/lib/kbd/keymaps/xkb/$layout.map.gz
