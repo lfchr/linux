@@ -4,9 +4,6 @@ on:
   push:
     branches: 
       - latest
-  schedule:
-    - cron: '45 19 * * 3,6'
-      timezone: "Europe/Stockholm"
 
 jobs:
   build:
