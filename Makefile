@@ -22,7 +22,7 @@ IMAGE_URL = $(shell \
 			echo "$$HOME_URL" \
 		' \
 )
-IMAGE_SOURCE ?= $(IMAGE_URL)/tree/main
+IMAGE_SOURCE = $(IMAGE_URL)
 IMAGE_VENDOR = $(shell \
 	podman run --rm \
 		--volume $$(pwd):/run/src:ro \

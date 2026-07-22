@@ -23,7 +23,6 @@ jobs:
       - name: build
         run: |
           IMAGE_NAME="ghcr.io/${{ github.repository }}:testing" \
-          IMAGE_SOURCE="https://github.com/${{ github.repository }}/tree/testing" \
           make image-testing
 
       - name: push
