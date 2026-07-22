@@ -12,6 +12,8 @@ for repo in /etc/yum.repos.d/*; do
 	sed -i 's/enabled=1/enabled=0/g' $repo
 done
 
+dnf clean all
+
 echo 'NoDisplay=true' >> /usr/share/applications/org.freedesktop.MalcontentControl.desktop
 
 systemctl set-default graphical.target

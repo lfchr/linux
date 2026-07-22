@@ -350,5 +350,3 @@ ${standard[@]} \
 ${workstation[@]} \
 ${groups[@]} \
 ${exclude[@]}
-
-dnf clean all
