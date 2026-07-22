@@ -27,14 +27,13 @@ mandatory=(
 
 default=(
     "org.gnome.NautilusPreviewer"
-    "org.gnome.Loupe.HEIC"
     "dev.deedles.Trayscale"
     "io.github.kolunmi.Bazaar"
-    "ca.desrt.dconf-editor"
-    "page.tesk.Refine"
 )
 
 testing=(
+    "ca.desrt.dconf-editor"
+    "page.tesk.Refine"
     "org.gnome.dspy"
     "com.github.tchx84.Flatseal"
 )
