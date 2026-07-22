@@ -45,3 +45,16 @@ for list in 'base' 'evdev'; do
   customsv        Swedish (Custom)' \
   /usr/share/xkeyboard-config-2/rules/$list.lst
 done
+
+# see src.fedoraproject.org/rpms/kbd/blob/rawhide/f/kbd.spec
+
+dnf in -y console-setup
+
+mkdir /tmp/ckbcomp_custom_layouts/
+
+for layout in 'customen' 'customsv'; do
+    ckbcomp -rules base "$layout" \
+    | gzip > /usr/lib/kbd/keymaps/xkb/$layout.map.gz
+done
+
+dnf history undo last -y
