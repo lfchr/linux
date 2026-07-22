@@ -20,10 +20,7 @@ jobs:
       - name: login
         run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
 
-      - name: build
-        run: |
-          IMAGE_NAME="ghcr.io/${{ github.repository }}:latest" \
-          make image
-
-      - name: push
-        run: podman push ghcr.io/${{ github.repository }}:latest
+      - name: build and push
+        uses: ./.github/workflows/build-push-ghcr.yml
+        with:
+          image-tag: latest
