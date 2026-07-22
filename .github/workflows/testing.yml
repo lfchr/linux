@@ -21,6 +21,6 @@ jobs:
         run: podman login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
 
       - name: build and push
-        uses: ./.github/workflows/build-push-ghcr.yml
+        uses: ./.github/workflows/build-push-ghcr.yml@main
         with:
           image-tag: testing
