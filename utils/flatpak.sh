@@ -44,14 +44,15 @@ groups=(
     "default"
 )
 
-for group in ${groups[@]}
-do
+for group in ${groups[@]}; do
     declare -n apps="$group"
     for app in ${apps[@]}
     do
-        echo "[Flatpak Preinstall $app]" >> /usr/share/flatpak/preinstall.d/$group.preinstall
-        echo "Branch=stable" >> /usr/share/flatpak/preinstall.d/$group.preinstall
-        echo "IsRuntime=false" >> /usr/share/flatpak/preinstall.d/$group.preinstall
-        echo "" >> /usr/share/flatpak/preinstall.d/$group.preinstall
+        cat >> /usr/share/flatpak/preinstall.d/$group.preinstall << EOF
+[Flatpak Preinstall $app]
+Branch=stable
+IsRuntime=false
+
+EOF
     done
 done
