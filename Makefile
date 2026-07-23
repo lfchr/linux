@@ -151,10 +151,6 @@ image-testing:
 fast:
 	podman build \
 		--tag $(IMAGE_NAME) \
-		--skip-unused-stages=false \
-		--volume $$(pwd):/run/src \
-		--security-opt=label=disable \
-		--pull=never \
 		--build-arg=base_image="$(BASE_IMAGE)" \
 		--file=Containerfile.fast \
 		.
