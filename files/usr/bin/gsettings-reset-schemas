@@ -20,6 +20,6 @@ schemas=(
     'org.gtk.Settings.FileChooser sort-directories-first'
 )
 
-for schema in ${schemas[@]}; do
+for schema in "${schemas[@]}"; do
     gsettings reset "$schema"
 done
