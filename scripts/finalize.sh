@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+sed -i 's/2.fedora.pool.ntp.org/2.debian.pool.ntp.org/' /etc/chrony.conf
+
 cat > /usr/share/gnome-initial-setup/vendor.conf << 'EOF'
 [pages]
 skip=language;keyboard;privacy;software;parental-controls
