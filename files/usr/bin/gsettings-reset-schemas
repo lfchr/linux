@@ -8,6 +8,7 @@ schemas=(
     'org.gnome.desktop.app-folders folder-children'
     'org.gnome.settings-daemon.plugins.power idle-dim'
     'org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout'
+    'org.gnome.settings-daemon.plugins.color night-light-enabled'
     'org.gnome.desktop.session idle-delay'
     'org.gnome.nautilus.preferences default-folder-viewer'
     'org.gnome.nautilus.list-view default-zoom-level'
