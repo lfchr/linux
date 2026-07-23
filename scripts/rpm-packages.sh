@@ -32,12 +32,22 @@ remove_drivers=(
 
 # everything else to remove
 remove_misc=(
+"NetworkManager-cloud-setup"
 "WALinuxAgent-udev"
 "chunkah"
-"rpm-ostree*"
 "clevis*"
+"cloud-utils-growpart"
 "console-login-helper-messages*"
+"lsof"
+"net-tools"
+"python3-rpm"
 "qemu-user-static*"
+"rpm-ostree*"
+"sg3_utils"
+"socat"
+"sssd-common-pac"
+"sssd-krb5"
+"sssd-ldap"
 )
 
 dnf rm -y \
