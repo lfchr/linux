@@ -110,6 +110,12 @@ image-latest:
 		.
 
 image-testing:
+	podman run \
+		--rm \
+		--volume $$(pwd):/run/src \
+		--security-opt=label=disable \
+		"$(BASE_IMAGE)" \
+		/run/src/scripts/prepare-build-testing.sh
 	podman build \
 		--tag $(IMAGE_NAME) \
 		--skip-unused-stages=false \
@@ -140,7 +146,6 @@ image-testing:
 		--annotation="org.opencontainers.image.description=$(IMAGE_DESCRIPTION)" \
 		--annotation="org.opencontainers.image.base.digest=$(BASE_DIGEST)" \
 		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
-		--file=Containerfile.testing \
 		.
 
 fast:
