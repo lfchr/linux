@@ -28,6 +28,7 @@ HOME_URL="https://github.com/lfchr/linux"
 BUG_REPORT_URL="https://gitlab.com/fedora/bootc/base-images/-/work_items"
 ANSI_COLOR="1;33"
 VENDOR_NAME="lfchr"
+VENDOR_URL="https://github.com/lfchr"
 DEFAULT_HOSTNAME="linux-????"
 EOF
 
