@@ -3,13 +3,24 @@
 set -euxo pipefail
 
 files=$(realpath $(dirname $0)/../files)
+repo=$(realpath $(dirname $0)/..)
+
+cd $repo
+
+commit_date=$(date +%y.%m.%d -d @$(git show --no-patch --format=%ct))
 
 # description is used by makefile
 
 OS_NAME="Linux"
 OS_DESCRIPTION="Bootable Linux desktop container image"
-OS_VERSION="$(date +%y.%m.%d)"
-OS_BUILD="$(date -u +%H)F$(rpm -E %fedora)"
+
+if [[ $image_tag = "latest" ]]; then
+    OS_VERSION="$commit_date"
+else
+    OS_VERSION="$commit_date $image_tag"
+fi
+
+OS_BUILD=$(TZ='Europe/Stockholm' date +'%F %R %Z' -d $image_created)
 
 # www.freedesktop.org/software/systemd/man/259/os-release.html
 
