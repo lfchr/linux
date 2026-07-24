@@ -2,8 +2,6 @@
 
 set -euxo pipefail
 
-. /usr/lib/os-release
-
 # description is used by makefile
 
 OS_NAME="Linux"
@@ -16,7 +14,7 @@ BUILD="$(date -u +%H)F$(rpm -E %fedora)"
 cat > /usr/lib/os-release << EOF
 NAME="$OS_NAME"
 ID=linux
-ID_LIKE=$ID
+ID_LIKE=fedora
 PRETTY_NAME="$OS_NAME $OS_VERSION"
 VARIANT="desktop"
 VARIANT_ID=desktop
@@ -26,7 +24,6 @@ IMAGE_VERSION="$BUILD"
 RELEASE_TYPE="stable"
 HOME_URL="https://github.com/lfchr/linux"
 BUG_REPORT_URL="https://gitlab.com/fedora/bootc/base-images/-/work_items"
-SUPPORT_END=$SUPPORT_END
 ANSI_COLOR="1;33"
 VENDOR_NAME="lfchr"
 DEFAULT_HOSTNAME="linux-????"
