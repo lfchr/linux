@@ -7,7 +7,7 @@ set -euxo pipefail
 OS_NAME="Linux"
 OS_DESCRIPTION="Bootable Linux desktop container image"
 OS_VERSION="$(date +%y.%m.%d)"
-BUILD="$(date -u +%H)F$(rpm -E %fedora)"
+OS_BUILD="$(date -u +%H)F$(rpm -E %fedora)"
 
 # www.freedesktop.org/software/systemd/man/259/os-release.html
 
@@ -20,7 +20,7 @@ VARIANT="desktop"
 VARIANT_ID=desktop
 VERSION="$OS_VERSION"
 VERSION_ID="$OS_VERSION"
-IMAGE_VERSION="$BUILD"
+IMAGE_VERSION="$OS_BUILD"
 RELEASE_TYPE="stable"
 HOME_URL="https://github.com/lfchr/linux"
 BUG_REPORT_URL="https://gitlab.com/fedora/bootc/base-images/-/work_items"
@@ -30,6 +30,6 @@ DEFAULT_HOSTNAME="linux-????"
 EOF
 
 cat > /usr/lib/issue << EOF
-$OS_NAME $OS_VERSION (build $BUILD) \l
+$OS_NAME $OS_VERSION (build $OS_BUILD) \l
 
 EOF
