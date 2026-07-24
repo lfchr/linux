@@ -21,12 +21,9 @@ image:
 	image_created=$(IMAGE_CREATED) \
 	./utils/os-release.sh
 	
-	if [ $(IMAGE_TAG) = "testing" ]; then
-		./utils/prepare-build-testing.sh
-	fi
+	if [ $(IMAGE_TAG) = "testing" ]; then ./utils/prepare-build-testing.sh; fi
 	
 	set -a
-	
 	source ./files/usr/lib/os-release
 	
 	podman build \
