@@ -9,6 +9,10 @@ rm -f \
 /etc/yum.repos.d/fedora-cisco-openh264.repo \
 /etc/yum.repos.d/fedora-updates-testing.repo
 
+for repo in /etc/yum.repos.d/*; do
+    mv $repo /usr/share/dnf5/repos.d
+done
+
 # hardware:
 # intel cpu/igpu
 # intel audio
