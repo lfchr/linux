@@ -31,7 +31,8 @@ jobs:
 
       - name: build
         run: |
-          IMAGE_NAME="ghcr.io/lfchr/linux:${{ inputs.image-tag }}" \
+          IMAGE_REPO="ghcr.io/lfchr/linux" \
+          IMAGE_TAG="${{ inputs.image-tag }}" \
           make image-${{ inputs.image-tag }}
 
       - name: push

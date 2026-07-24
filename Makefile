@@ -1,4 +1,5 @@
-IMAGE_NAME ?= localhost/linux:latest
+IMAGE_REPO ?= localhost/linux
+IMAGE_TAG ?= latest
 BASE_IMAGE_REPO ?= quay.io/fedora/fedora-bootc
 BASE_IMAGE_TAG ?= 44
 CHUNKAH ?= quay.io/coreos/chunkah:latest
@@ -78,7 +79,7 @@ IMAGE_VERSION = $(shell \
 
 image-latest:
 	podman build \
-		--tag $(IMAGE_NAME) \
+		--tag $(IMAGE_REPO):$(IMAGE_TAG) \
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
@@ -117,7 +118,7 @@ image-testing:
 		"$(BASE_IMAGE)" \
 		/run/src/scripts/prepare-build-testing.sh
 	podman build \
-		--tag $(IMAGE_NAME) \
+		--tag $(IMAGE_REPO):$(IMAGE_TAG) \
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
