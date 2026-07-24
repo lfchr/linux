@@ -11,7 +11,6 @@ $scripts/packages/flatpak.sh
 cp -Rfv $files/* /
 
 $scripts/remove-fedora-branding.sh
-$scripts/os-release.sh
 $scripts/mimeapps.sh
 $scripts/keyboard.sh
 
