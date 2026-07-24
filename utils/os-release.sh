@@ -41,6 +41,7 @@ ANSI_COLOR="1;33"
 VENDOR_NAME="lfchr"
 VENDOR_URL="https://github.com/lfchr"
 DEFAULT_HOSTNAME="linux-????"
+DESCRIPTION="$OS_DESCRIPTION"
 EOF
 
 cat > $files/usr/lib/issue << EOF
