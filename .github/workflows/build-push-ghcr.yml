@@ -33,7 +33,7 @@ jobs:
         run: |
           IMAGE_REPO="ghcr.io/lfchr/linux" \
           IMAGE_TAG="${{ inputs.image-tag }}" \
-          make image-${{ inputs.image-tag }}
+          make image
 
       - name: push
         run: podman push ghcr.io/lfchr/linux:${{ inputs.image-tag }}
