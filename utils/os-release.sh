@@ -17,7 +17,7 @@ cat > $files/usr/lib/os-release << EOF
 NAME="$OS_NAME"
 ID=linux
 ID_LIKE=fedora
-PRETTY_NAME="$OS_NAME $OS_VERSION"
+PRETTY_NAME="$OS_NAME"
 VARIANT="desktop"
 VARIANT_ID=desktop
 VERSION="$OS_VERSION"
