@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 # remove some of the logo images. i decided this was better than removing
-# the package ‘fedora-logos’ and replacing it with something like ‘generic-logos’.
+# the package ‘fedora-logos’ and replacing it with ‘generic-logos’.
 rm -f \
 /etc/favicon.png \
 /usr/share/plymouth/themes/spinner/watermark.png \
@@ -26,3 +26,14 @@ rm -rfv \
 /usr/share/icons/oxygen \
 /usr/share/icewm \
 /usr/share/pixmaps/bootloader
+
+# misc.
+rm -f \
+/usr/lib/issue.net \
+/etc/issue.net \
+/usr/lib/system-release-cpe \
+/etc/system-release-cpe \
+/usr/lib/fedora-release \
+/etc/fedora-release \
+/etc/redhat-release \
+/etc/system-release

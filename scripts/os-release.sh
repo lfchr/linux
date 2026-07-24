@@ -36,13 +36,3 @@ cat > /usr/lib/issue << EOF
 $OS_NAME $OS_VERSION (build $BUILD) \l
 
 EOF
-
-rm -f \
-/usr/lib/issue.net \
-/etc/issue.net \
-/usr/lib/system-release-cpe \
-/etc/system-release-cpe \
-/usr/lib/fedora-release \
-/etc/fedora-release \
-/etc/redhat-release \
-/etc/system-release
