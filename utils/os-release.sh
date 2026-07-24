@@ -14,8 +14,10 @@ OS_DESCRIPTION="Bootable Linux desktop container image"
 
 if [[ $image_tag = "latest" ]]; then
     OS_VERSION="$commit_date"
+    OS_VERSION_ID=$OS_VERSION
 else
     OS_VERSION="$commit_date $image_tag"
+    OS_VERSION_ID="$commit_date-$image_tag"
 fi
 
 OS_BUILD=$(TZ='Europe/Stockholm' date +'%F %R %Z' -d $image_created)
@@ -30,7 +32,7 @@ PRETTY_NAME="$OS_NAME"
 VARIANT="desktop"
 VARIANT_ID=desktop
 VERSION="$OS_VERSION"
-VERSION_ID="$OS_VERSION"
+VERSION_ID="$OS_VERSION_ID"
 IMAGE_VERSION="$OS_BUILD"
 RELEASE_TYPE="stable"
 HOME_URL="https://github.com/lfchr/linux"
