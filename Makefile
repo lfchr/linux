@@ -147,10 +147,3 @@ image-testing:
 		--annotation="org.opencontainers.image.base.digest=$(BASE_DIGEST)" \
 		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
 		.
-
-fast:
-	podman build \
-		--tag $(IMAGE_NAME) \
-		--build-arg=base_image="$(BASE_IMAGE)" \
-		--file=Containerfile.fast \
-		.
