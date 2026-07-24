@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+files=$(realpath $(dirname $0)/../files)
+
 # description is used by makefile
 
 OS_NAME="Linux"
@@ -11,7 +13,7 @@ OS_BUILD="$(date -u +%H)F$(rpm -E %fedora)"
 
 # www.freedesktop.org/software/systemd/man/259/os-release.html
 
-cat > /usr/lib/os-release << EOF
+cat > $files/usr/lib/os-release << EOF
 NAME="$OS_NAME"
 ID=linux
 ID_LIKE=fedora
@@ -29,7 +31,7 @@ VENDOR_NAME="lfchr"
 DEFAULT_HOSTNAME="linux-????"
 EOF
 
-cat > /usr/lib/issue << EOF
+cat > $files/usr/lib/issue << EOF
 $OS_NAME $OS_VERSION (build $OS_BUILD) \l
 
 EOF
