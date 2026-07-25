@@ -3,7 +3,6 @@
 set -euxo pipefail
 
 files=$(realpath $(dirname $0)/../files)
-repo=$(realpath $(dirname $0)/..)
 
 commit_date=$(date +%y.%m.%d -d @$(git show --no-patch --format=%ct))
 
