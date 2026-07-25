@@ -66,3 +66,11 @@ image:
 		--annotation="org.opencontainers.image.base.digest=$(BASE_DIGEST)" \
 		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
 		.
+
+push:
+	for tag in $$(podman images $(IMAGE_REPO) --format {{.Tag}}); do \
+		podman push \
+			--compression-format "zstd:chunked" \
+			$(IMAGE_REPO):$$tag; \
+	done
+	
