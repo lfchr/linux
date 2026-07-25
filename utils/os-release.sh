@@ -4,7 +4,10 @@ set -euxo pipefail
 
 files=$(realpath $(dirname $0)/../files)
 
-commit_date=$(date +%y.%m.%d -d @$(git show --no-patch --format=%ct))
+COMMIT_DATE=$(date +%FT%TZ -u -d @$(git show --no-patch --format=%ct))
+COMMIT_HASH=$(git show --no-patch --format=%H)
+
+version_commit=$(date +%y.%m.%d -u -d $COMMIT_DATE)
 
 # description is used by makefile
 
@@ -12,11 +15,11 @@ OS_NAME="Linux"
 OS_DESCRIPTION="Bootable Linux desktop container image"
 
 if [[ $image_tag = "latest" ]]; then
-    OS_VERSION="$commit_date"
+    OS_VERSION="$version_commit"
     OS_VERSION_ID=$OS_VERSION
 else
-    OS_VERSION="$commit_date $image_tag"
-    OS_VERSION_ID="$commit_date-$image_tag"
+    OS_VERSION="$version_commit $image_tag"
+    OS_VERSION_ID="$version_commit-$image_tag"
 fi
 
 OS_BUILD=$(TZ='Europe/Stockholm' date +'%F %R %Z' -d $image_created)
@@ -41,6 +44,8 @@ VENDOR_NAME="lfchr"
 VENDOR_URL="https://github.com/lfchr"
 DEFAULT_HOSTNAME="linux-????"
 DESCRIPTION="$OS_DESCRIPTION"
+COMMIT_DATE="$COMMIT_DATE"
+COMMIT_HASH="$COMMIT_HASH"
 EOF
 
 cat > $files/usr/lib/issue << EOF
