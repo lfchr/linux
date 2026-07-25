@@ -5,7 +5,7 @@ set -euxo pipefail
 files=$(realpath $(dirname $0)/../files)
 scripts=$(realpath $(dirname $0))
 
-$scripts/packages/rpm-packages.sh
+$scripts/packages/rpm.sh
 $scripts/packages/flatpak.sh
 
 cp -Rfv $files/* /
