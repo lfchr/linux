@@ -28,11 +28,15 @@ RUN --mount=from=rootfs,src=/,target=/chunkah,ro \
 FROM oci:out AS final
 
 ARG oci_created
+ARG oci_authors
 ARG oci_url
+ARG oci_documentation
 ARG oci_source
 ARG oci_version
+ARG oci_revision
 ARG oci_vendor
 ARG oci_licenses
+ARG oci_ref_name
 ARG oci_title
 ARG oci_description
 ARG oci_base_digest
@@ -40,11 +44,15 @@ ARG oci_base_name
 
 LABEL containers.bootc=1
 LABEL org.opencontainers.image.created="$oci_created"
+LABEL org.opencontainers.image.authors="$oci_authors"
 LABEL org.opencontainers.image.url="$oci_url"
+LABEL org.opencontainers.image.documentation="$oci_documentation"
 LABEL org.opencontainers.image.source="$oci_source"
 LABEL org.opencontainers.image.version="$oci_version"
+LABEL org.opencontainers.image.revision="$oci_revision"
 LABEL org.opencontainers.image.vendor="$oci_vendor"
 LABEL org.opencontainers.image.licenses="$oci_licenses"
+LABEL org.opencontainers.image.ref.name="$oci_ref_name"
 LABEL org.opencontainers.image.title="$oci_title"
 LABEL org.opencontainers.image.description="$oci_description"
 LABEL org.opencontainers.image.base.digest="$oci_base_digest"
