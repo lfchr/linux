@@ -39,7 +39,7 @@ image:
 		--build-arg=oci_version="$$VERSION (build $$IMAGE_VERSION)" \
 		--build-arg=oci_vendor="$$VENDOR_NAME" \
 		--build-arg=oci_licenses="MIT" \
-		--build-arg=oci_title="$$PRETTY_NAME" \
+		--build-arg=oci_title="$$NAME" \
 		--build-arg=oci_description="$$DESCRIPTION" \
 		--build-arg=oci_base_digest="$(BASE_DIGEST)" \
 		--build-arg=oci_base_name="$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
@@ -50,7 +50,7 @@ image:
 		--annotation="org.opencontainers.image.version=$$VERSION (build $$IMAGE_VERSION)" \
 		--annotation="org.opencontainers.image.vendor=$$VENDOR_NAME" \
 		--annotation="org.opencontainers.image.licenses=MIT" \
-		--annotation="org.opencontainers.image.title=$$PRETTY_NAME" \
+		--annotation="org.opencontainers.image.title=$$NAME" \
 		--annotation="org.opencontainers.image.description=$$DESCRIPTION" \
 		--annotation="org.opencontainers.image.base.digest=$(BASE_DIGEST)" \
 		--annotation="org.opencontainers.image.base.name=$(BASE_IMAGE_REPO):$(BASE_IMAGE_TAG)" \
