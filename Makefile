@@ -15,6 +15,7 @@ BASE_DIGEST := $(shell \
 BASE_IMAGE := $(BASE_IMAGE_REPO)@$(BASE_DIGEST)
 
 IMAGE_CREATED := $(shell date --iso-8601=minutes)
+IMAGE_CREATED_EPOCH := $(shell date -u +%s -d $(IMAGE_CREATED))
 
 image:
 	image_tag=$(IMAGE_TAG) \
@@ -28,6 +29,7 @@ image:
 	. files/usr/lib/os-release; \
 	podman build \
 		--tag $(IMAGE_REPO):$(IMAGE_TAG) \
+		--timestamp=$(IMAGE_CREATED_EPOCH) \
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
