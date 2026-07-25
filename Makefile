@@ -14,7 +14,7 @@ BASE_DIGEST := $(shell \
 
 BASE_IMAGE := $(BASE_IMAGE_REPO)@$(BASE_DIGEST)
 
-IMAGE_CREATED := $(shell date --iso-8601=minutes)
+IMAGE_CREATED := $(shell date -u +%FT%TZ)
 IMAGE_CREATED_EPOCH := $(shell date -u +%s -d $(IMAGE_CREATED))
 
 image:
