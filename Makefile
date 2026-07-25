@@ -21,20 +21,18 @@ image:
 	image_created=$(IMAGE_CREATED) \
 	./utils/os-release.sh
 	
-	if [ $(IMAGE_TAG) = "testing" ]; then ./utils/prepare-build-testing.sh; fi
+	if [ $(IMAGE_TAG) = "testing" ]; \
+	then ./utils/prepare-build-testing.sh; \
+	fi
 	
-	set -a
-	source ./files/usr/lib/os-release
-	
+	. files/usr/lib/os-release; \
 	podman build \
 		--tag $(IMAGE_REPO):$(IMAGE_TAG) \
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
 		--security-opt=label=disable \
-		\
 		--build-arg=base_image="$(BASE_IMAGE)" \
 		--build-arg=chunkah="$(CHUNKAH)" \
-		\
 		--build-arg=oci_created="$(IMAGE_CREATED)" \
 		--build-arg=oci_url="$$HOME_URL" \
 		--build-arg=oci_source="$$HOME_URL" \
