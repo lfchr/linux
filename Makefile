@@ -22,8 +22,8 @@ image:
 	image_created=$(IMAGE_CREATED) \
 	./utils/os-release.sh
 	
-	if [ $(IMAGE_TAG) = "testing" ]; \
-	then ./utils/prepare-build-testing.sh; \
+	if [ $(IMAGE_TAG) = "testing" ]; then \
+		./utils/prepare-build-testing.sh; \
 	fi
 	
 	. files/usr/lib/os-release; \
