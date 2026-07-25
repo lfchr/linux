@@ -41,4 +41,5 @@ jobs:
       - name: push
         run: |
           podman push \
+          --compression-format "zstd:chunked" \
           ghcr.io/lfchr/linux:${{ inputs.image-tag }}
