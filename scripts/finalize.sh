@@ -16,6 +16,10 @@ dnf clean all
 
 echo 'NoDisplay=true' >> /usr/share/applications/org.freedesktop.MalcontentControl.desktop
 
+rm -f \
+/usr/lib/systemd/system/bootc-fetch-apply-updates.timer \
+/usr/lib/systemd/system/bootc-fetch-apply-updates.service
+
 systemctl set-default graphical.target
 systemctl preset-all --system
 systemctl preset-all --global
