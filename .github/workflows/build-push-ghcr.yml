@@ -27,7 +27,10 @@ jobs:
           ref: ${{ inputs.image-tag }}
 
       - name: login
-        run: podman login ghcr.io -u ${{ inputs.ghcr-user }} -p ${{ secrets.ghcr_token }}
+        run: |
+          podman login ghcr.io \
+          -u ${{ inputs.ghcr-user }} \
+          -p ${{ secrets.ghcr_token }}
 
       - name: build
         run: |
@@ -36,4 +39,6 @@ jobs:
           make image
 
       - name: push
-        run: podman push ghcr.io/lfchr/linux:${{ inputs.image-tag }}
+        run: |
+          podman push \
+          ghcr.io/lfchr/linux:${{ inputs.image-tag }}
