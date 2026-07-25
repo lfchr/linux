@@ -36,7 +36,7 @@ image:
 		--build-arg=oci_created="$(IMAGE_CREATED)" \
 		--build-arg=oci_url="$$HOME_URL" \
 		--build-arg=oci_source="$$HOME_URL" \
-		--build-arg=oci_version="$$VERSION" \
+		--build-arg=oci_version="$$VERSION (build $$IMAGE_VERSION)" \
 		--build-arg=oci_vendor="$$VENDOR_NAME" \
 		--build-arg=oci_licenses="MIT" \
 		--build-arg=oci_title="$$PRETTY_NAME" \
@@ -47,7 +47,7 @@ image:
 		--annotation="org.opencontainers.image.created=$(IMAGE_CREATED)" \
 		--annotation="org.opencontainers.image.url=$$HOME_URL" \
 		--annotation="org.opencontainers.image.source=$$HOME_URL" \
-		--annotation="org.opencontainers.image.version=$$VERSION" \
+		--annotation="org.opencontainers.image.version=$$VERSION (build $$IMAGE_VERSION)" \
 		--annotation="org.opencontainers.image.vendor=$$VENDOR_NAME" \
 		--annotation="org.opencontainers.image.licenses=MIT" \
 		--annotation="org.opencontainers.image.title=$$PRETTY_NAME" \
