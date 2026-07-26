@@ -29,7 +29,7 @@ image:
 	. files/usr/lib/os-release; \
 	podman build \
 		--tag $(IMAGE_REPO):$(IMAGE_TAG) \
-		--tag $(IMAGE_REPO):$$(echo $$VERSION_ID | sed -e 's/\./_/g') \
+		--tag $(IMAGE_REPO):$$VERSION_ID \
 		--timestamp=$(IMAGE_CREATED_EPOCH) \
 		--skip-unused-stages=false \
 		--volume $$(pwd):/run/src \
