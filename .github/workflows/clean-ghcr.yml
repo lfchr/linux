@@ -21,13 +21,13 @@ jobs:
 
       - name: clean
         run: |
-          for id in $version_ids; do \
-            curl -L \
-              -X DELETE \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2026-03-10" \
-              https://api.github.com/user/packages/container/linux/versions/$id; \
-          done
-          
-
+          if [ -n "$version_ids" ]; then \
+            for id in $version_ids; do \
+              curl -L \
+                -X DELETE \
+                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Accept: application/vnd.github+json" \
+                -H "X-GitHub-Api-Version: 2026-03-10" \
+                https://api.github.com/user/packages/container/linux/versions/$id; \
+            done; \
+          fi
