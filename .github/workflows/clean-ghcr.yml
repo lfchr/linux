@@ -6,29 +6,28 @@ jobs:
   clean:
     runs-on: ubuntu-26.04
     steps:
-      - name: login
-        run: |
-          skopeo login ghcr.io \
-          -u ${{ github.actor }} \
-          -p ${{ secrets.GITHUB_TOKEN }}
-
       - name: get digests
         run: |
-          digests=$( \
+          version_ids=$( \
             curl -L \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2026-03-10" \
               https://api.github.com/user/packages/container/linux/versions?per_page=100 \
-            | jq -r 'sort_by(.updated_at) | .[0:-8].[].name' \
+            | jq -r 'sort_by(.updated_at) | .[0:-8].[].id' \
             | tr '\n' ' ' \
           )
-          echo "digests=$digests" >> "$GITHUB_ENV"
+          echo "version_ids=$version_ids" >> "$GITHUB_ENV"
 
       - name: clean
         run: |
-          for digest in $digests; do \
-            skopeo delete docker://ghcr.io/${{ github.repository }}@$digest; \
+          for id in $version_ids; do \
+            curl -L \
+              -X DELETE \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              https://api.github.com/user/packages/container/linux/versions/$id; \
           done
           
 
