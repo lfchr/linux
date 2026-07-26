@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   clean:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-slim
     steps:
       - name: get digests
         run: |
