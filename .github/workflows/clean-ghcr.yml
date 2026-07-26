@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: login
         run: |
-          skopeo login \
+          skopeo login ghcr.io \
           -u ${{ github.actor }} \
           -p ${{ secrets.GITHUB_TOKEN }}
 
