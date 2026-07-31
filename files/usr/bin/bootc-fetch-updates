@@ -82,21 +82,29 @@ if power-saver-enabled; then
     exit 0
 fi
 
+# if update-available; then
+#     printf "Update available, fetching"
+#     fetch-updates
+#    
+#     printf "Update staged, notifying user"
+#     notif_id=$(notify-restart | awk '{print $2}')
+#     if notify-restart-action; then
+#         printf "Restarting system"
+#         restart-system
+#         exit 0
+#     else
+#         printf "Not restarting system"
+#         notify-restart-close "$notif_id"
+#         exit 0
+#     fi
+# else
+#     printf "No update available"
+#     exit 0
+# fi
+
 if update-available; then
     printf "Update available, fetching"
     fetch-updates
-    
-    printf "Update staged, notifying user"
-    notif_id=$(notify-restart | awk '{print $2}')
-    if notify-restart-action; then
-        printf "Restarting system"
-        restart-system
-        exit 0
-    else
-        printf "Not restarting system"
-        notify-restart-close "$notif_id"
-        exit 0
-    fi
 else
     printf "No update available"
     exit 0
