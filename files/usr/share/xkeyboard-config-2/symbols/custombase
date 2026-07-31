@@ -32,16 +32,16 @@ xkb_symbols "basic" {
     // nbsp and narrow nbsp
     key <SPCE> { [space,space,nobreakspace,U202F] };
     // superscript numbers
-    key <AE01> { [any,any,any,any,U00B9] };
-    key <AE02> { [any,any,any,any,U00B2] };
-    key <AE03> { [any,any,any,any,U00B3] };
-    key <AE04> { [any,any,any,any,U0074] };
-    key <AE05> { [any,any,any,any,U0075] };
-    key <AE06> { [any,any,any,any,U0076] };
-    key <AE07> { [any,any,any,any,U0077] };
-    key <AE08> { [any,any,any,any,U0078] };
-    key <AE09> { [any,any,any,any,U0079] };
-    key <AE10> { [any,any,any,any,U0070] };
+    key <AE01> { [any,any,any,any,onesuperior] };
+    key <AE02> { [any,any,any,any,twosuperior] };
+    key <AE03> { [any,any,any,any,threesuperior] };
+    key <AE04> { [any,any,any,any,foursuperior] };
+    key <AE05> { [any,any,any,any,fivesuperior] };
+    key <AE06> { [any,any,any,any,sixsuperior] };
+    key <AE07> { [any,any,any,any,sevensuperior] };
+    key <AE08> { [any,any,any,any,eightsuperior] };
+    key <AE09> { [any,any,any,any,ninesuperior] };
+    key <AE10> { [any,any,any,any,zerosuperior] };
     
     include "custombase(mac-iso-custom-modifiers)"
 };
