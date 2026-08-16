@@ -9,6 +9,9 @@ sed -i -e '/^dnf in/a\
 ${testing[@]} \\' \
 $scripts/packages/rpm.sh
 
+sed -i -e 's/^dnf in/dnf in --skip-unavailable/' \
+$scripts/packages/rpm.sh
+
 sed -i -e '/^groups=(/a\
     "testing"' \
 $scripts/packages/flatpak.sh
