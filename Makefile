@@ -2,7 +2,7 @@ IMAGE_REPO ?= localhost/linux
 IMAGE_TAG ?= latest
 
 BASE_IMAGE_REPO := quay.io/fedora/fedora-bootc
-BASE_IMAGE_TAG ?= 45
+BASE_IMAGE_TAG ?= 44
 
 CHUNKAH ?= quay.io/coreos/chunkah:latest
 
