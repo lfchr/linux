@@ -104,8 +104,6 @@ gnome_desktop=(
 "gnome-user-share"
 "gst-thumbnailers"
 "gvfs-afc"
-"gvfs-afp"
-"gvfs-archive"
 "gvfs-fuse"
 "gvfs-goa"
 "gvfs-gphoto2"
