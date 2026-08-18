@@ -177,6 +177,8 @@ container_management=(
 "skopeo"
 "flatpak"
 "toolbox"
+"systemd-container"
+"mkosi"
 )
 
 # dnf group info input-methods
@@ -197,6 +199,7 @@ input_methods=(
 # forge.fedoraproject.org/atomic-desktops/config/src/branch/main/silverblue-common.yaml
 # also some weak dependencies
 misc=(
+"git-core"
 "tailscale"
 "rsms-inter-vf-fonts"
 "google-noto-emoji-fonts"
@@ -213,6 +216,8 @@ misc=(
 "exiv2"
 "wl-clipboard"
 "xdg-utils"
+"apt"
+"ubu-keyring"
 )
 
 # all mandatory and default:
@@ -339,8 +344,7 @@ exclude=(
 "-x julietaula-montserrat-fonts"
 "-x kernel-tools"
 "-x python3-perf"
-"-x qemu-kvm-core"
-"-x qemu-device-*"
+"-x perl*"
 )
 
 testing=(
