@@ -172,11 +172,8 @@ printing_optional=(
 # dnf group info container-management
 container_management=(
 "podman"
-"skopeo"
 "flatpak"
 "toolbox"
-"systemd-container"
-"mkosi"
 )
 
 # dnf group info input-methods
@@ -214,8 +211,6 @@ misc=(
 "exiv2"
 "wl-clipboard"
 "xdg-utils"
-"apt"
-"ubu-keyring"
 )
 
 # all mandatory and default:
@@ -252,9 +247,6 @@ groups=(
 "default-fonts-core-mono"
 "default-fonts-core-sans"
 "default-fonts-core-serif"
-"default-fonts-other-mono"
-"default-fonts-other-sans"
-"default-fonts-other-serif"
 )
 
 # dnf group info core
@@ -342,6 +334,8 @@ exclude=(
 "-x julietaula-montserrat-fonts"
 "-x kernel-tools"
 "-x python3-perf"
+"-x qemu-kvm-core"
+"-x qemu-device-*"
 "-x perl*"
 )
 
