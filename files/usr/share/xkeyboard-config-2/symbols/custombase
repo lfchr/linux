@@ -25,10 +25,11 @@ xkb_symbols "basic" {
     key <AD08> { [any,any,any,any,parenright] };
     // multiply on /
     key <AB10> { [any,any,any,any,multiply] };
-    // vertical arrows ↓,↑ on k
-    key <AC08> { [any,any,any,any,downarrow,uparrow] };
-    // horizontal arrows →,← on l
-    key <AC09> { [any,any,any,any,rightarrow,leftarrow] };
+    // arrows
+    key <AC08> { [any,any,any,any,downarrow] };
+    key <AC09> { [any,any,any,any,uparrow] };
+    key <AB08> { [any,any,any,any,leftarrow] };
+    key <AB09> { [any,any,any,any,rightarrow] };
     // nbsp and narrow nbsp
     key <SPCE> { [space,space,nobreakspace,U202F] };
     // superscript numbers
